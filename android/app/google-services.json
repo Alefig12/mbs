@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "200222201182",
+    "project_id": "moviebs-c147d",
+    "storage_bucket": "moviebs-c147d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200222201182:android:26d5f9d72ba719f6c8abcf",
+        "android_client_info": {
+          "package_name": "com.example.mbs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "200222201182-0dn1tffin5c9v102pm7iqfj4aelgdu2b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC36udLaMcZz2FApfgv5rKENoUNdhPeX0c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "200222201182-0dn1tffin5c9v102pm7iqfj4aelgdu2b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
