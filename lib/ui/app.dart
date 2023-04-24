@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mbs/ui/pages/login_page.dart';
+import 'package:mbs/ui/pages/profile_page.dart';
 
 class MBS extends StatelessWidget {
   const MBS({super.key});
@@ -9,7 +10,7 @@ class MBS extends StatelessWidget {
   Widget build(BuildContext context) {
     return const GetMaterialApp(
       title: 'MBS',
-      home: LoginPage(),
+      home: ProfilePage(), // change back to login page
     );
   }
 }
