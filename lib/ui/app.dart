@@ -13,7 +13,8 @@ class MBS extends StatelessWidget {
     return GetMaterialApp(
       title: 'MBS',
       theme: ThemeData(scaffoldBackgroundColor: Color.fromARGB(255, 43, 4, 56)),
-      home: LoginPage(), // change back to login page
+      home:
+          LoginPage(), // change back to login page// change back to login page
     );
   }
 }
