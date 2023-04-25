@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mbs/ui/pages/login_page.dart';
+import 'package:mbs/ui/pages/menu_page.dart';
 import 'package:mbs/ui/pages/profile_page.dart';
 import 'package:mbs/ui/pages/tickets_page.dart';
 
@@ -9,9 +10,10 @@ class MBS extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return GetMaterialApp(
       title: 'MBS',
-      home: TicketPage(), // change back to login page
+      theme: ThemeData(scaffoldBackgroundColor: Color.fromARGB(255, 43, 4, 56)),
+      home: LoginPage(), // change back to login page
     );
   }
 }
