@@ -7,6 +7,19 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         key: Key('loginPage'),
+        appBar: AppBar(
+          title: Text(
+            'Hello, Guest!',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20.0,
+            ),
+          ),
+          backgroundColor: Color.fromARGB(255, 43, 4, 56),
+          centerTitle: true,
+          elevation: 1,
+          shadowColor: Colors.white,
+        ),
         resizeToAvoidBottomInset: true,
         body: SafeArea(
             child: Center(
@@ -26,27 +39,53 @@ class LoginPage extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           color: Colors.white),
                     ),
-                    SizedBox(
-                        height:
-                            100), // Add some space between the text and the image
-                    Image.asset('assets/Imagen_Portada.png'),
                   ],
                 )),
-            TextButton(
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.grey),
+            SizedBox(height: 250.0),
+            SizedBox(
+              width: 300.0,
+              height: 45,
+              child: TextButton(
+                style: ButtonStyle(
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.black),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.grey),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                  ),
+                ),
+                onPressed: () {},
+                child: Text(
+                  'Sign Up',
+                  style: TextStyle(fontSize: 20),
+                ),
               ),
-              onPressed: () {},
-              child: Text('Sign Up'),
             ),
-            TextButton(
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.grey),
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
+            SizedBox(height: 30.0),
+            SizedBox(
+              width: 300.0,
+              height: 45,
+              child: TextButton(
+                style: ButtonStyle(
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.grey),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.black),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                  ),
+                ),
+                onPressed: () {},
+                child: Text(
+                  'Log In',
+                  style: TextStyle(fontSize: 20),
+                ),
               ),
-              onPressed: () {},
-              child: Text('Log In'),
             ),
           ],
         )))));
