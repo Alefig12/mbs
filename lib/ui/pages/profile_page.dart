@@ -22,19 +22,23 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0XFF281c4b),
+      appBar: AppBar(
+        backgroundColor: const Color(0XFF281c4b),
+        title: Title(
+            color: Colors.white,
+            child: Text(
+              "MY PROFILE",
+              style: GoogleFonts.montserrat(
+                  textStyle: const TextStyle(
+                      fontSize: 30,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold)),
+            )),
+        centerTitle: true,
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(15),
-            child: Title(color: Colors.white, child: Text("MY PROFILE",
-            style: GoogleFonts.montserrat(textStyle: const TextStyle(
-              fontSize: 30,
-              color: Colors.white,
-              fontWeight: FontWeight.bold
-            )),)
-            ),
-          ),
           const Divider(
             color: Color(0XFFb2a4c7),
             thickness: 3,
@@ -77,25 +81,27 @@ class _ProfilePageState extends State<ProfilePage> {
 Widget profilePicAndName = Row(
   mainAxisAlignment: MainAxisAlignment.center,
   children: [
-    const Icon(Icons.person,size: 100,color: Colors.white),
+    const Icon(Icons.person, size: 100, color: Colors.white),
     Column(
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
-          child: Text("Hello,\n" + "Tom!",style: GoogleFonts.poppins(
-            textStyle: const TextStyle(
-               fontWeight: FontWeight.bold,
-              color: Colors.white,
-              fontSize: 35
+          child: Text(
+            "Hello,\n" + "Tom!",
+            style: GoogleFonts.poppins(
+              textStyle: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: 35),
             ),
-          ),),
+          ),
         ),
-        Text('tbrown@ttu.edu',style: GoogleFonts.poppins(
-          textStyle: const TextStyle(
-            color: Colors.white,
-            fontSize: 25,
-          )
-        )),
+        Text('tbrown@ttu.edu',
+            style: GoogleFonts.poppins(
+                textStyle: const TextStyle(
+              color: Colors.white,
+              fontSize: 25,
+            ))),
       ],
     )
   ],
@@ -120,8 +126,7 @@ Widget manageAccount = Expanded(
       padding: const EdgeInsets.all(12),
       child: Card(
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10))
-        ),
+            borderRadius: BorderRadius.all(Radius.circular(10))),
         color: const Color(0XFF694f93),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -138,10 +143,8 @@ Widget manageAccount = Expanded(
                   Text(
                     'Personal information',
                     style: GoogleFonts.poppins(
-                      textStyle: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20
-                      ),
+                      textStyle:
+                          const TextStyle(color: Colors.white, fontSize: 20),
                     ),
                   ),
                 ],
@@ -163,10 +166,8 @@ Widget manageAccount = Expanded(
                   Text(
                     'My Cinema',
                     style: GoogleFonts.poppins(
-                      textStyle: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20
-                      ),
+                      textStyle:
+                          const TextStyle(color: Colors.white, fontSize: 20),
                     ),
                   ),
                 ],
@@ -188,10 +189,8 @@ Widget manageAccount = Expanded(
                   Text(
                     'Saved Payment Accounts',
                     style: GoogleFonts.poppins(
-                      textStyle: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20
-                      ),
+                      textStyle:
+                          const TextStyle(color: Colors.white, fontSize: 20),
                     ),
                   ),
                 ],
@@ -206,8 +205,8 @@ Widget manageAccount = Expanded(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: const [
-          Icon(Icons.exit_to_app_rounded,color: Colors.white,size: 50),
-          Text('Sign out',style: TextStyle(color: Colors.white,fontSize: 30))
+          Icon(Icons.exit_to_app_rounded, color: Colors.white, size: 50),
+          Text('Sign out', style: TextStyle(color: Colors.white, fontSize: 30))
         ],
       ),
     ),
