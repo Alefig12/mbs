@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class MainPage extends StatelessWidget {
+  const MainPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: Key('loginPage'),
+        key: Key('mainPage'),
         appBar: AppBar(
           title: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             IconButton(
