@@ -8,13 +8,20 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
         key: Key('loginPage'),
         appBar: AppBar(
-          title: Text(
-            'Hello, Guest!',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20.0,
+          title: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            IconButton(
+              icon: Icon(Icons.person_outline_rounded),
+              onPressed: () {},
             ),
-          ),
+            Text(
+              'Hello, Guest!',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20.0,
+                fontWeight: FontWeight.w900,
+              ),
+            )
+          ]),
           backgroundColor: Color.fromARGB(255, 43, 4, 56),
           centerTitle: true,
           elevation: 1,
@@ -32,19 +39,19 @@ class LoginPage extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      'Movie \n Theater',
+                      'MOVIE \n THEATER',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 50.0,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w900,
                           color: Colors.white),
                     ),
                   ],
                 )),
             SizedBox(height: 250.0),
             SizedBox(
-              width: 300.0,
-              height: 45,
+              width: 320.0,
+              height: 60,
               child: TextButton(
                 style: ButtonStyle(
                   foregroundColor:
@@ -53,21 +60,21 @@ class LoginPage extends StatelessWidget {
                       MaterialStateProperty.all<Color>(Colors.grey),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
                 ),
                 onPressed: () {},
                 child: Text(
                   'Sign Up',
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 25),
                 ),
               ),
             ),
             SizedBox(height: 30.0),
             SizedBox(
-              width: 300.0,
-              height: 45,
+              width: 320.0,
+              height: 60,
               child: TextButton(
                 style: ButtonStyle(
                   foregroundColor:
@@ -76,14 +83,14 @@ class LoginPage extends StatelessWidget {
                       MaterialStateProperty.all<Color>(Colors.black),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
                 ),
                 onPressed: () {},
                 child: Text(
                   'Log In',
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 25),
                 ),
               ),
             ),
