@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mbs/ui/pages/buyTickets_page.dart';
+import 'package:mbs/ui/pages/selectedMovie_page.dart';
 import '../widget/movieProfile.dart';
 
 class MenuPage extends StatefulWidget {
@@ -105,7 +106,7 @@ class _MenuPageState extends State<MenuPage> {
                 children: [
                   GestureDetector(
                       onTap: () {
-                        Get.to(buyTicketPage());
+                        Get.to(selectedMoviePage());
                       },
                       child: popularMovie()),
                   SizedBox(

@@ -74,6 +74,7 @@ flutter:
     - assets/movie_ticket.png
     - assets/poster1.jpg
     - assets/poster2.jpg
+    - assets/user.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

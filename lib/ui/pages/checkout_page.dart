@@ -8,6 +8,8 @@ class checkoutPage extends StatefulWidget {
   State<checkoutPage> createState() => _checkoutPageState();
 }
 
+int? _card = 2;
+
 class _checkoutPageState extends State<checkoutPage> {
   @override
   Widget build(BuildContext context) {
@@ -16,10 +18,10 @@ class _checkoutPageState extends State<checkoutPage> {
           child: Center(
         child: Padding(
           padding: const EdgeInsets.all(18.0),
-          child: Column(
-            children: [
-              Expanded(
-                child: Row(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Row(
                   children: [
                     Expanded(
                         flex: 1,
@@ -44,14 +46,12 @@ class _checkoutPageState extends State<checkoutPage> {
                     ),
                   ],
                 ),
-              ),
-              Divider(
-                height: 15,
-                thickness: 3,
-                color: Colors.white,
-              ),
-              Expanded(
-                child: Row(
+                Divider(
+                  height: 15,
+                  thickness: 3,
+                  color: Colors.white,
+                ),
+                Row(
                   children: [
                     Text(
                       "PAYMENT METHOD",
@@ -67,62 +67,56 @@ class _checkoutPageState extends State<checkoutPage> {
                     )
                   ],
                 ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(18.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 100,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(14),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 48, 2, 58),
-                              blurRadius: 5,
-                              offset: Offset(0, 1), // Shadow position
-                            ),
-                          ],
-                        ),
-                        child: Icon(
-                          Icons.savings,
-                          color: Color.fromARGB(255, 255, 55, 165),
-                          size: 50,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 40,
-                      ),
-                      Container(
-                        width: 100,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(14),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 48, 2, 58),
-                              blurRadius: 5,
-                              offset: Offset(0, 1), // Shadow position
-                            ),
-                          ],
-                        ),
-                        child: Icon(
-                          Icons.credit_card,
-                          color: Colors.amber,
-                          size: 50,
-                        ),
-                      )
-                    ],
-                  ),
+                SizedBox(
+                  height: 30,
                 ),
-              ),
-              Expanded(
-                child: Row(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 100,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(14),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromARGB(255, 48, 2, 58),
+                            blurRadius: 5,
+                            offset: Offset(0, 1), // Shadow position
+                          ),
+                        ],
+                      ),
+                      child: Icon(
+                        Icons.savings,
+                        color: Color.fromARGB(255, 255, 55, 165),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 40,
+                    ),
+                    Container(
+                      width: 100,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(14),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromARGB(255, 48, 2, 58),
+                            blurRadius: 5,
+                            offset: Offset(0, 1), // Shadow position
+                          ),
+                        ],
+                      ),
+                      child: Icon(
+                        Icons.credit_card,
+                        color: Colors.amber,
+                      ),
+                    )
+                  ],
+                ),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("pigPal",
@@ -140,12 +134,10 @@ class _checkoutPageState extends State<checkoutPage> {
                             fontWeight: FontWeight.w400))
                   ],
                 ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Expanded(
-                child: Align(
+                SizedBox(
+                  height: 30,
+                ),
+                Align(
                   alignment: Alignment.centerLeft,
                   child: Text('SELECT YOUR CARD',
                       style: TextStyle(
@@ -153,9 +145,15 @@ class _checkoutPageState extends State<checkoutPage> {
                           fontSize: 25,
                           fontWeight: FontWeight.w500)),
                 ),
-              ),
-              Expanded(
-                child: Align(
+                Column(
+                  children: <Widget>[
+                    Card('VISA XXX XXXXX', 0, _card),
+                    Card('MASTER XXXXXX XX', 1, _card),
+                    Card('DEBIT XX XX XX', 2, _card),
+                    Card('CAFE XOXOXOXOX', 0, _card),
+                  ],
+                ),
+                Align(
                   alignment: Alignment.centerLeft,
                   child: Text('ITEMS',
                       style: TextStyle(
@@ -163,9 +161,7 @@ class _checkoutPageState extends State<checkoutPage> {
                           fontSize: 25,
                           fontWeight: FontWeight.w500)),
                 ),
-              ),
-              Expanded(
-                child: Container(
+                Container(
                   margin: EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     color: Color.fromARGB(48, 173, 162, 162),
@@ -201,9 +197,10 @@ class _checkoutPageState extends State<checkoutPage> {
                     ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: Row(
+                SizedBox(
+                  height: 30,
+                ),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text('TOTAL',
@@ -218,9 +215,10 @@ class _checkoutPageState extends State<checkoutPage> {
                             fontWeight: FontWeight.w500))
                   ],
                 ),
-              ),
-              Expanded(
-                child: Container(
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
                   width: double.infinity,
                   child: TextButton(
                     child: Text(
@@ -235,12 +233,43 @@ class _checkoutPageState extends State<checkoutPage> {
                         elevation: 2,
                         backgroundColor: Colors.amber),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       )),
+    );
+  }
+}
+
+class Card extends StatefulWidget {
+  Card(String this.cardName, int this.i, int? this.card, {super.key});
+  final String cardName;
+  final int i;
+  int? card;
+
+  @override
+  State<Card> createState() => _CardState();
+}
+
+class _CardState extends State<Card> {
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(
+        widget.cardName,
+        style: TextStyle(color: Colors.white),
+      ),
+      leading: Radio<int>(
+        value: widget.i,
+        groupValue: _card,
+        onChanged: (int? value) {
+          setState(() {
+            _card = value;
+          });
+        },
+      ),
     );
   }
 }
