@@ -9,6 +9,7 @@ import 'package:mbs/ui/pages/profile_page.dart';
 import 'package:mbs/ui/pages/review_page.dart';
 import 'package:mbs/ui/pages/tickets_page.dart';
 import 'package:mbs/ui/pages/signup_page.dart';
+import 'package:mbs/ui/pages/addmovie_page.dart';
 
 class MBS extends StatelessWidget {
   const MBS({super.key});
