@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 
-class AddMovie extends StatelessWidget {
+class AddMovie extends StatefulWidget {
   const AddMovie({Key? key}) : super(key: key);
 
+  @override
+  _AddMovieState createState() => _AddMovieState();
+}
+
+class _AddMovieState extends State<AddMovie> {
+  String? _selectedItem;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,14 +49,29 @@ class AddMovie extends StatelessWidget {
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
                     children: [
-                      Text(
-                        'ADD MOVIE',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 50.0,
-                          fontWeight: FontWeight.w900,
-                          color: Colors.white,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.movie,
+                            size: 50.0,
+                            color: Colors.black,
+                          ),
+                          Text(
+                            'NEW MOVIE',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 45.0,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Icon(
+                            Icons.movie,
+                            size: 50.0,
+                            color: Colors.black,
+                          )
+                        ],
                       ),
                       SizedBox(height: 30.0),
                       Row(
@@ -107,9 +128,12 @@ class AddMovie extends StatelessWidget {
                               SizedBox(width: 20.0),
                               DropdownButton<String>(
                                 dropdownColor: Color.fromARGB(255, 43, 4, 56),
-                                value:
-                                    'Cinemark Movies 16 and XD', // Change this value to set the initial value of the dropdown button
-                                onChanged: (String? newValue) {},
+                                value: _selectedItem,
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    _selectedItem = newValue!;
+                                  });
+                                },
                                 items: <String>[
                                   'Cinemark Movies 16 and XD',
                                   'Alamo Drafthouse Cinema',
@@ -128,6 +152,71 @@ class AddMovie extends StatelessWidget {
                               ),
                             ],
                           ),
+                          SizedBox(height: 25.0),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'CLASSIFICATION:',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              ListTile(
+                                dense: true,
+                                contentPadding: EdgeInsets.zero,
+                                title: Text(
+                                  'G - General Audiences',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              ListTile(
+                                dense: true,
+                                contentPadding: EdgeInsets.zero,
+                                title: Text(
+                                  'PG - Parental Guidance Suggested',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              ListTile(
+                                dense: true,
+                                contentPadding: EdgeInsets.zero,
+                                title: Text(
+                                  'PG-13 - Parents Strongly Cautioned',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              ListTile(
+                                dense: true,
+                                contentPadding: EdgeInsets.zero,
+                                title: Text(
+                                  'R - Restricted',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              ListTile(
+                                dense: true,
+                                contentPadding: EdgeInsets.zero,
+                                title: Text(
+                                  'NC-17 - Adults Only',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     ],
