@@ -6,14 +6,23 @@ import '../widget/movieProfile.dart';
 import 'package:flutter/material.dart';
 
 class selectedMoviePage extends StatefulWidget {
-  const selectedMoviePage({super.key});
+  String movieName;
+  List<String> movieGenders;
+  ImageProvider<Object> movieImage;
+
+  selectedMoviePage({
+    super.key,
+    required this.movieName,
+    required this.movieGenders,
+    required this.movieImage,
+  });
 
   @override
   State<selectedMoviePage> createState() => _selectedMoviePageState();
 }
 
 class _selectedMoviePageState extends State<selectedMoviePage> {
-  List<String> genders = ['fiction', 'fantasy', 'action'];
+  // List<String> genders = ['fiction', 'fantasy', 'action'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +46,7 @@ class _selectedMoviePageState extends State<selectedMoviePage> {
                 Expanded(
                   flex: 4,
                   child: Text(
-                    'Movie Name',
+                    widget.movieName,
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
@@ -53,14 +62,14 @@ class _selectedMoviePageState extends State<selectedMoviePage> {
             ),
             Padding(
               padding: const EdgeInsets.all(28.0),
-              child: Container(width: 400, height: 180, child: Movie()),
-            ),
-            Text(
-              genders[0] + ', ' + genders[1] + ', ' + genders[2],
-              style: TextStyle(
-                  color: Color.fromARGB(255, 255, 145, 48),
-                  fontWeight: FontWeight.w600,
-                  fontSize: 20),
+              child: Container(
+                  width: 500,
+                  height: 180,
+                  child: posterMovie(
+                    movieName: widget.movieName,
+                    movieGenders: widget.movieGenders,
+                    movieImage: widget.movieImage,
+                  )),
             ),
             Padding(
               padding: const EdgeInsets.all(30.0),
@@ -132,7 +141,10 @@ class _selectedMoviePageState extends State<selectedMoviePage> {
                   ),
                   child: TextButton(
                       onPressed: () {
-                        Get.to(ReviewPage());
+                        Get.to(ReviewPage(
+                          movieName: widget.movieName,
+                          movieImage: widget.movieImage,
+                        ));
                       },
                       child: Text(
                         'Add review',
@@ -156,7 +168,9 @@ class _selectedMoviePageState extends State<selectedMoviePage> {
                   ),
                   child: TextButton(
                       onPressed: () {
-                        Get.to(buyTicketPage());
+                        Get.to(buyTicketPage(
+                            movieName: widget.movieName,
+                            movieImage: widget.movieImage));
                       },
                       child: Text(
                         'Buy tickets',

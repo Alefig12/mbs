@@ -7,7 +7,14 @@ import '../widget/movieProfile.dart';
 import 'package:intl/intl.dart';
 
 class buyTicketPage extends StatefulWidget {
-  const buyTicketPage({super.key});
+  String movieName;
+  ImageProvider<Object> movieImage;
+
+  buyTicketPage({
+    super.key,
+    required this.movieName,
+    required this.movieImage,
+  });
 
   @override
   State<buyTicketPage> createState() => _buyTicketPageState();
@@ -63,22 +70,13 @@ class _buyTicketPageState extends State<buyTicketPage> {
               color: Colors.white,
             ),
             Expanded(
-              flex: 6,
+              flex: 8,
               child: Padding(
                 padding: const EdgeInsets.only(top: 8.0),
-                child: Movie(),
-              ),
-            ),
-            Expanded(
-              flex: 2,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: Text(
-                  'LEGEND OF WHITE SNAKE',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 25),
+                child: posterMovie(
+                  movieName: widget.movieName,
+                  movieGenders: [''],
+                  movieImage: widget.movieImage,
                 ),
               ),
             ),

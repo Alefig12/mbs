@@ -15,23 +15,13 @@ class _AddMovieState extends State<AddMovie> {
       key: Key('addMoviePage'),
       appBar: AppBar(
         toolbarHeight: 70,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-              icon: Icon(Icons.arrow_back_ios),
-              onPressed: () {},
-            ),
-            Text(
-              'MOVIES',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 30.0,
-                fontWeight: FontWeight.w900,
-              ),
-            ),
-            SizedBox(width: 40.0),
-          ],
+        title: Text(
+          'MOVIES',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 30.0,
+            fontWeight: FontWeight.w900,
+          ),
         ),
         backgroundColor: Color.fromARGB(255, 43, 4, 56),
         centerTitle: true,
