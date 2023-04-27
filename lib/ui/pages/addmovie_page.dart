@@ -1,4 +1,7 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddMovie extends StatefulWidget {
   const AddMovie({Key? key}) : super(key: key);
@@ -9,19 +12,32 @@ class AddMovie extends StatefulWidget {
 
 class _AddMovieState extends State<AddMovie> {
   String? _selectedItem;
+  String? _selectedOption = '';
+
+  File? _image;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: Key('addMoviePage'),
       appBar: AppBar(
         toolbarHeight: 70,
-        title: Text(
-          'MOVIES',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 30.0,
-            fontWeight: FontWeight.w900,
-          ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+              icon: Icon(Icons.arrow_back_ios),
+              onPressed: () {},
+            ),
+            Text(
+              'MOVIES',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 30.0,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+            SizedBox(width: 40.0),
+          ],
         ),
         backgroundColor: Color.fromARGB(255, 43, 4, 56),
         centerTitle: true,
@@ -115,7 +131,12 @@ class _AddMovieState extends State<AddMovie> {
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
-                              SizedBox(width: 20.0),
+                              Icon(
+                                Icons.location_on,
+                                size: 30.0,
+                                color: Colors.white,
+                              ),
+                              SizedBox(width: 5.0),
                               DropdownButton<String>(
                                 dropdownColor: Color.fromARGB(255, 43, 4, 56),
                                 value: _selectedItem,
@@ -155,59 +176,82 @@ class _AddMovieState extends State<AddMovie> {
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
-                              ListTile(
-                                dense: true,
-                                contentPadding: EdgeInsets.zero,
-                                title: Text(
-                                  'G - General Audiences',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                              SizedBox(height: 10.0),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  RadioListTile(
+                                    title: Text(
+                                      'Legendary',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    value: 'legendary',
+                                    groupValue: _selectedOption,
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        _selectedOption = newValue as String;
+                                      });
+                                    },
+                                    activeColor: Colors.white,
                                   ),
-                                ),
-                              ),
-                              ListTile(
-                                dense: true,
-                                contentPadding: EdgeInsets.zero,
-                                title: Text(
-                                  'PG - Parental Guidance Suggested',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                  RadioListTile(
+                                    title: Text('Fantasy',
+                                        style: TextStyle(color: Colors.white)),
+                                    value: 'fantasy',
+                                    groupValue: _selectedOption,
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        _selectedOption = newValue as String;
+                                      });
+                                    },
+                                    activeColor: Colors.white,
                                   ),
-                                ),
-                              ),
-                              ListTile(
-                                dense: true,
-                                contentPadding: EdgeInsets.zero,
-                                title: Text(
-                                  'PG-13 - Parents Strongly Cautioned',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                  RadioListTile(
+                                    title: Text(
+                                      'Adventure',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    value: 'adventure',
+                                    groupValue: _selectedOption,
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        _selectedOption = newValue as String;
+                                      });
+                                    },
+                                    activeColor: Colors.white,
                                   ),
-                                ),
-                              ),
-                              ListTile(
-                                dense: true,
-                                contentPadding: EdgeInsets.zero,
-                                title: Text(
-                                  'R - Restricted',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              ListTile(
-                                dense: true,
-                                contentPadding: EdgeInsets.zero,
-                                title: Text(
-                                  'NC-17 - Adults Only',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
+                                ],
                               ),
                             ],
-                          )
+                          ),
                         ],
+                      ),
+                      SizedBox(height: 20.0),
+                      SizedBox(
+                        width: 320.0,
+                        height: 60,
+                        child: TextButton(
+                          style: ButtonStyle(
+                            foregroundColor:
+                                MaterialStateProperty.all<Color>(Colors.grey),
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                Color.fromARGB(255, 244, 192, 30)),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                            ),
+                          ),
+                          onPressed: () {},
+                          child: Text(
+                            'ADD MOVIE',
+                            style: TextStyle(
+                                fontSize: 25,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w900),
+                          ),
+                        ),
                       ),
                     ],
                   ),
