@@ -71,67 +71,74 @@ class _checkoutPageState extends State<checkoutPage> {
                   height: 30,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Container(
-                      width: 100,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(14),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color.fromARGB(255, 48, 2, 58),
-                            blurRadius: 5,
-                            offset: Offset(0, 1), // Shadow position
+                    Column(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            print('click pigPal');
+                          },
+                          child: Container(
+                            width: 100,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(14),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color.fromARGB(255, 48, 2, 58),
+                                  blurRadius: 5,
+                                  offset: Offset(0, 1), // Shadow position
+                                ),
+                              ],
+                            ),
+                            child: Icon(
+                              Icons.savings,
+                              color: Color.fromARGB(255, 255, 55, 165),
+                            ),
                           ),
-                        ],
-                      ),
-                      child: Icon(
-                        Icons.savings,
-                        color: Color.fromARGB(255, 255, 55, 165),
-                      ),
+                        ),
+                        Text("pigPal",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w400)),
+                      ],
                     ),
-                    SizedBox(
-                      width: 40,
-                    ),
-                    Container(
-                      width: 100,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(14),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color.fromARGB(255, 48, 2, 58),
-                            blurRadius: 5,
-                            offset: Offset(0, 1), // Shadow position
+                    Column(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            print('click credit card');
+                          },
+                          child: Container(
+                            width: 100,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(14),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color.fromARGB(255, 48, 2, 58),
+                                  blurRadius: 5,
+                                  offset: Offset(0, 1), // Shadow position
+                                ),
+                              ],
+                            ),
+                            child: Icon(
+                              Icons.credit_card,
+                              color: Colors.amber,
+                            ),
                           ),
-                        ],
-                      ),
-                      child: Icon(
-                        Icons.credit_card,
-                        color: Colors.amber,
-                      ),
-                    )
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("pigPal",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w400)),
-                    SizedBox(
-                      width: 70,
+                        ),
+                        Text("credit card",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w400))
+                      ],
                     ),
-                    Text("credit card",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w400))
                   ],
                 ),
                 SizedBox(
