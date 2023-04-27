@@ -17,6 +17,7 @@ class _buyTicketPageState extends State<buyTicketPage> {
   final ScrollController scrollController = ScrollController();
   TextEditingController dateController = TextEditingController();
   int _counter = 0;
+  double _price = 0;
   @override
   void initState() {
     super.initState();
@@ -123,8 +124,13 @@ class _buyTicketPageState extends State<buyTicketPage> {
                           color: Colors.white,
                         ), //icon of text field
                         labelText: "Enter Date",
-                        labelStyle: TextStyle(color: Colors.white),
-                        floatingLabelStyle: TextStyle(color: Colors.white)
+                        labelStyle:
+                            TextStyle(color: Color.fromARGB(255, 61, 2, 54)),
+                        floatingLabelStyle: TextStyle(
+                            color: Color.fromARGB(255, 61, 2, 54),
+                            fontWeight: FontWeight.w800),
+                        filled: true,
+                        fillColor: Colors.white
                         //label text of field
                         ),
                     readOnly: true, // when true user cannot edit text
@@ -173,10 +179,13 @@ class _buyTicketPageState extends State<buyTicketPage> {
                         ],
                       ),
                       child: IconButton(
-                        icon: Icon(Icons.add),
+                        icon: Icon(Icons.remove),
                         onPressed: () {
                           setState(() {
-                            _counter++;
+                            if (_counter > 0) {
+                              _counter--;
+                              _price = 15.99 * _counter;
+                            }
                           });
                         },
                       ),
@@ -198,12 +207,11 @@ class _buyTicketPageState extends State<buyTicketPage> {
                         ],
                       ),
                       child: IconButton(
-                        icon: Icon(Icons.remove),
+                        icon: Icon(Icons.add),
                         onPressed: () {
                           setState(() {
-                            if (_counter > 0) {
-                              _counter--;
-                            }
+                            _counter++;
+                            _price = 15.99 * _counter;
                           });
                         },
                       ),
@@ -216,7 +224,7 @@ class _buyTicketPageState extends State<buyTicketPage> {
                   children: [
                     Expanded(
                         flex: 2,
-                        child: Text("15.00 USD",
+                        child: Text("${_price}",
                             style:
                                 TextStyle(color: Colors.white, fontSize: 20))),
                     Expanded(
