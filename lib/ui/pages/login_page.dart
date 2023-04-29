@@ -1,4 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:mbs/ui/pages/signup_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -96,7 +98,9 @@ class LoginPage extends StatelessWidget {
                         color: Colors.white),
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const SignUp()));
+                    },
                     child: Text(
                       'Sign up',
                       style: TextStyle(
