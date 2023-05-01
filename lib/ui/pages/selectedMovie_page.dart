@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:mbs/objects/movie.dart';
 import 'package:mbs/ui/pages/buyTickets_page.dart';
 import 'package:mbs/ui/pages/review_page.dart';
 
@@ -6,16 +7,16 @@ import '../widget/movieProfile.dart';
 import 'package:flutter/material.dart';
 
 class selectedMoviePage extends StatefulWidget {
-  String movieName;
-  List<String> movieGenders;
+  late String movieName;
+  late List<String> movieGenders;
   ImageProvider<Object> movieImage;
+  Movie movie;
 
-  selectedMoviePage({
-    super.key,
-    required this.movieName,
-    required this.movieGenders,
-    required this.movieImage,
-  });
+  selectedMoviePage(
+      {required this.movie, required this.movieImage, super.key}) {
+    movieName = movie.name;
+    movieGenders = movie.genres;
+  }
 
   @override
   State<selectedMoviePage> createState() => _selectedMoviePageState();
@@ -35,7 +36,7 @@ class _selectedMoviePageState extends State<selectedMoviePage> {
                 Expanded(
                     flex: 1,
                     child: IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back,
                         color: Colors.white,
                       ),
@@ -47,7 +48,7 @@ class _selectedMoviePageState extends State<selectedMoviePage> {
                   flex: 4,
                   child: Text(
                     widget.movieName,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
                         fontSize: 35),
@@ -55,7 +56,7 @@ class _selectedMoviePageState extends State<selectedMoviePage> {
                 ),
               ],
             ),
-            Divider(
+            const Divider(
               height: 15,
               thickness: 3,
               color: Colors.white,
@@ -75,12 +76,12 @@ class _selectedMoviePageState extends State<selectedMoviePage> {
               padding: const EdgeInsets.all(30.0),
               child: Container(
                 height: 200,
-                padding: EdgeInsets.all(18),
+                padding: const EdgeInsets.all(18),
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 255, 255, 255),
+                  color: const Color.fromARGB(255, 255, 255, 255),
                   borderRadius: BorderRadius.circular(25),
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                       color: Color.fromARGB(255, 48, 2, 58),
                       blurRadius: 5,
@@ -88,10 +89,10 @@ class _selectedMoviePageState extends State<selectedMoviePage> {
                     ),
                   ],
                 ),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Align(
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'User Reviews',
@@ -101,26 +102,35 @@ class _selectedMoviePageState extends State<selectedMoviePage> {
                               fontSize: 20),
                         ),
                       ),
-                      SizedBox(
-                        height: 20,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: Container(
+                        child: ListView.builder(
+                            itemCount: widget.movie.reviews.length,
+                            scrollDirection: Axis.vertical,
+                            itemBuilder: (context, index) {
+                              return Column(
+                                children: [
+                                  Obx(
+                                    //got to change this, it's not working
+                                    () => review(
+                                        widget.movie.reviews[index].author,
+                                        widget
+                                            .movie.reviews[index].description),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                ],
+                              );
+                            }),
                       ),
-                      review('Sthephany', 'I don´t know what im doing here'),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      review('Alex',
-                          'I really like it, it had plenty action and fiction'),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      review('Miguel', 'I don´t know what im doing here'),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      review(
-                          'Roberto', 'This movie is the greatest of all times.')
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -129,9 +139,9 @@ class _selectedMoviePageState extends State<selectedMoviePage> {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(58, 255, 255, 255),
+                    color: const Color.fromARGB(58, 255, 255, 255),
                     borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         color: Color.fromARGB(255, 27, 1, 33),
                         blurRadius: 5,
@@ -142,23 +152,23 @@ class _selectedMoviePageState extends State<selectedMoviePage> {
                   child: TextButton(
                       onPressed: () {
                         Get.to(ReviewPage(
-                          movieName: widget.movieName,
+                          movie: widget.movie,
                           movieImage: widget.movieImage,
                         ));
                       },
-                      child: Text(
+                      child: const Text(
                         'Add review',
                         style: TextStyle(color: Colors.white, fontSize: 22),
                       )),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 60,
                 ),
                 Container(
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(58, 255, 255, 255),
+                    color: const Color.fromARGB(58, 255, 255, 255),
                     borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         color: Color.fromARGB(255, 27, 1, 33),
                         blurRadius: 5,
@@ -172,7 +182,7 @@ class _selectedMoviePageState extends State<selectedMoviePage> {
                             movieName: widget.movieName,
                             movieImage: widget.movieImage));
                       },
-                      child: Text(
+                      child: const Text(
                         'Buy tickets',
                         style: TextStyle(color: Colors.white, fontSize: 22),
                       )),
@@ -206,7 +216,7 @@ class _reviewState extends State<review> {
               height: 30,
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(10)),
-              child: Image(image: AssetImage('assets/user.png')),
+              child: const Image(image: AssetImage('assets/user.png')),
             )),
         Expanded(
           flex: 3,

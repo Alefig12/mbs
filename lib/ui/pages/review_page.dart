@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mbs/objects/customer.dart';
+import 'package:mbs/objects/movie.dart';
+import 'package:mbs/objects/review.dart';
 import '../widget/movieProfile.dart';
 
 class ReviewPage extends StatefulWidget {
-  String movieName;
+  late String movieName;
   ImageProvider<Object> movieImage;
+  Movie movie;
 
   ReviewPage({
     super.key,
-    required this.movieName,
+    required this.movie,
     required this.movieImage,
-  });
+  }) {
+    movieName = movie.name;
+  }
 
   @override
   State<ReviewPage> createState() => _ReviewPageState();
@@ -18,6 +24,8 @@ class ReviewPage extends StatefulWidget {
 
 class _ReviewPageState extends State<ReviewPage> {
   final ScrollController scrollController = ScrollController();
+  final TextEditingController reviewController = TextEditingController();
+  CustomerController customerController = Get.find<CustomerController>();
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +76,7 @@ class _ReviewPageState extends State<ReviewPage> {
                 height: 150,
                 child: posterMovie(
                     movieName: widget.movieName,
-                    movieGenders: [''],
+                    movieGenders: widget.movie.genres,
                     movieImage: widget.movieImage)),
           ),
           Expanded(
@@ -76,6 +84,7 @@ class _ReviewPageState extends State<ReviewPage> {
             child: Container(
               padding: EdgeInsets.all(18),
               child: TextField(
+                controller: reviewController,
                 decoration: InputDecoration(
                   filled: true,
                   enabledBorder: OutlineInputBorder(
@@ -106,6 +115,9 @@ class _ReviewPageState extends State<ReviewPage> {
               ),
               child: TextButton(
                   onPressed: () {
+                    Review review = Review(1, reviewController.text,
+                        customerController.customer.username, widget.movie);
+
                     Get.back();
                   },
                   child: Text(

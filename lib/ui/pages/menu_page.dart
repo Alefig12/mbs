@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mbs/objects/movie.dart';
 import 'package:mbs/ui/pages/addmovie_page.dart';
 import 'package:mbs/ui/pages/buyTickets_page.dart';
 import 'package:mbs/ui/pages/selectedMovie_page.dart';
@@ -18,12 +19,14 @@ class _MenuPageState extends State<MenuPage> {
 
   @override
   Widget build(BuildContext context) {
+    MovieController movieController = Get.find();
+
     return SafeArea(
         child: Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Expanded(
+          const Expanded(
             flex: 1,
             child: Text(
               'Movie theater',
@@ -33,7 +36,7 @@ class _MenuPageState extends State<MenuPage> {
                   fontSize: 30),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Expanded(
@@ -47,9 +50,9 @@ class _MenuPageState extends State<MenuPage> {
                         flex: 2,
                         child: IconButton(
                           onPressed: () {
-                            Get.to(AddMovie());
+                            Get.to(const AddMovie());
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.add_circle_outline,
                             size: 35,
                             color: Colors.white,
@@ -64,13 +67,13 @@ class _MenuPageState extends State<MenuPage> {
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15.0),
                           ),
-                          fillColor: Color.fromARGB(82, 255, 255, 255),
+                          fillColor: const Color.fromARGB(82, 255, 255, 255),
                           hintText: 'browse...',
                         ),
                       ),
                     ),
                   ),
-                  Expanded(
+                  const Expanded(
                     flex: 1,
                     child: Icon(
                       Icons.search,
@@ -81,7 +84,7 @@ class _MenuPageState extends State<MenuPage> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Expanded(
@@ -90,33 +93,32 @@ class _MenuPageState extends State<MenuPage> {
               controller: scrollController,
               padding: const EdgeInsets.only(left: 18, right: 18, top: 5),
               scrollDirection: Axis.horizontal,
-              itemCount: 10,
+              itemCount: movieController.movies.length,
               itemBuilder: (context, index) => Row(
                 children: [
                   GestureDetector(
                       onTap: () {
                         Get.to(selectedMoviePage(
-                          movieImage: AssetImage('assets/poster1.jpg'),
-                          movieGenders: ['thriller', 'fantasy'],
-                          movieName: 'Parallel',
+                          movieImage: const AssetImage('assets/poster1.jpg'),
+                          movie: movieController.movies[index],
                         ));
                       },
                       child: Container(
                         child: posterMovie(
-                          movieImage: AssetImage('assets/poster1.jpg'),
-                          movieGenders: ['thriller', 'fantasy'],
-                          movieName: 'Parallel',
+                          movieImage: const AssetImage('assets/poster1.jpg'),
+                          movieGenders: movieController.movies[index].genres,
+                          movieName: movieController.movies[index].name,
                           admin: admin,
                         ),
                       )),
-                  SizedBox(
+                  const SizedBox(
                     width: 20,
                   )
                 ],
               ),
             ),
           ),
-          Expanded(
+          const Expanded(
             flex: 1,
             child: Padding(
               padding: EdgeInsets.only(left: 18.0),
@@ -136,13 +138,13 @@ class _MenuPageState extends State<MenuPage> {
             flex: 6,
             child: ListView.builder(
               controller: scrollController,
-              padding: EdgeInsets.all(18),
+              padding: const EdgeInsets.all(18),
               scrollDirection: Axis.horizontal,
               itemCount: 10,
               itemBuilder: (context, index) => Row(
                 children: [
-                  Container(width: 300, child: popularMovie()),
-                  SizedBox(
+                  Container(width: 300, child: const popularMovie()),
+                  const SizedBox(
                     width: 30,
                   )
                 ],
