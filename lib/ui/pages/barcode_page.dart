@@ -50,10 +50,7 @@ class BarcodePage extends StatelessWidget {
                     color: Colors.white,
                     fontWeight: FontWeight.bold)),
           ),
-          ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: movieImage
-          ),
+          ClipRRect(borderRadius: BorderRadius.circular(20), child: movieImage),
           Text(
             movieLocation,
             style: GoogleFonts.poppins(
@@ -80,14 +77,15 @@ class BarcodePage extends StatelessWidget {
             height: 150,
             child: Card(
               color: Colors.white,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
               child: barcode,
             ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.print,color: Colors.white),
+              const Icon(Icons.print, color: Colors.white),
               Text(
                 'PRINT TICKETS',
                 style: GoogleFonts.montserrat(
@@ -100,7 +98,7 @@ class BarcodePage extends StatelessWidget {
           )
         ]
             .map((widget) => Padding(
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   child: widget,
                 ))
             .toList(),

@@ -7,7 +7,7 @@ class SignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: Key('signUpPage'),
+        key: const Key('signUpPage'),
         resizeToAvoidBottomInset: true,
         body: SafeArea(
             child: Center(
@@ -17,7 +17,7 @@ class SignUp extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: Column(children: [
+                child: Column(children: const [
                   Text(
                     'SIGN UP',
                     textAlign: TextAlign.center,
@@ -28,10 +28,10 @@ class SignUp extends StatelessWidget {
                   )
                 ]),
               ),
-              SizedBox(height: 5.0),
+              const SizedBox(height: 5.0),
               Wrap(
                 children: [
-                  Text(
+                  const Text(
                     'Already have an account?',
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -43,10 +43,11 @@ class SignUp extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        MaterialPageRoute(
+                            builder: (context) => const LoginPage()),
                       );
                     },
-                    child: Text(' Login here',
+                    child: const Text(' Login here',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 17.0,
@@ -55,78 +56,78 @@ class SignUp extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(height: 40.0),
+              const SizedBox(height: 40.0),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'NAME',
                     style: TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.w900,
                         color: Colors.white),
                   ),
-                  SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
                   SizedBox(
                     width: 320.0,
                     child: TextFormField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                       filled: true,
                       fillColor: Colors.grey,
                     )),
                   ),
-                  SizedBox(height: 20.0),
-                  Text(
+                  const SizedBox(height: 20.0),
+                  const Text(
                     'EMAIL',
                     style: TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.w900,
                         color: Colors.white),
                   ),
-                  SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
                   SizedBox(
                     width: 320.0,
                     child: TextFormField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                       filled: true,
                       fillColor: Colors.grey,
                     )),
                   ),
-                  SizedBox(height: 20.0),
-                  Text(
+                  const SizedBox(height: 20.0),
+                  const Text(
                     'PASSWORD',
                     style: TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.w900,
                         color: Colors.white),
                   ),
-                  SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
                   SizedBox(
                     width: 320.0,
                     child: TextFormField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                       filled: true,
                       fillColor: Colors.grey,
                     )),
                   ),
-                  SizedBox(height: 20.0),
-                  Text(
+                  const SizedBox(height: 20.0),
+                  const Text(
                     'CONFIRM PASSWORD',
                     style: TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.w900,
                         color: Colors.white),
                   ),
-                  SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
                   SizedBox(
                     width: 320.0,
                     child: TextFormField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                       filled: true,
                       fillColor: Colors.grey,
                     )),
                   ),
-                  SizedBox(height: 40.0),
+                  const SizedBox(height: 40.0),
                   SizedBox(
                     width: 320.0,
                     height: 60,
@@ -144,7 +145,7 @@ class SignUp extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {},
-                      child: Text(
+                      child: const Text(
                         'SIGN UP',
                         style: TextStyle(fontSize: 25),
                       ),

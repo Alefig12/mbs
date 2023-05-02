@@ -2,19 +2,23 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mbs/objects/movie.dart';
 import 'package:mbs/ui/pages/checkout_page.dart';
 import '../widget/movieProfile.dart';
 import 'package:intl/intl.dart';
 
 class buyTicketPage extends StatefulWidget {
-  String movieName;
+  late String movieName;
   ImageProvider<Object> movieImage;
+  Movie movie;
 
   buyTicketPage({
     super.key,
-    required this.movieName,
+    required this.movie,
     required this.movieImage,
-  });
+  }) {
+    movieName = movie.name;
+  }
 
   @override
   State<buyTicketPage> createState() => _buyTicketPageState();
@@ -31,7 +35,10 @@ class _buyTicketPageState extends State<buyTicketPage> {
     dateController.text = "";
   }
 
+  DateTime? pickedDate;
+
   Widget build(BuildContext context) {
+    MovieController movieController = Get.find<MovieController>();
     return SafeArea(
         child: Scaffold(
       body: Padding(
@@ -75,7 +82,7 @@ class _buyTicketPageState extends State<buyTicketPage> {
                 padding: const EdgeInsets.only(top: 8.0),
                 child: posterMovie(
                   movieName: widget.movieName,
-                  movieGenders: [''],
+                  movieGenders: const [''],
                   movieImage: widget.movieImage,
                 ),
               ),
@@ -83,7 +90,7 @@ class _buyTicketPageState extends State<buyTicketPage> {
             Expanded(
                 flex: 2,
                 child: Row(
-                  children: [
+                  children: const [
                     Icon(
                       Icons.place,
                       color: Colors.white,
@@ -133,7 +140,7 @@ class _buyTicketPageState extends State<buyTicketPage> {
                         ),
                     readOnly: true, // when true user cannot edit text
                     onTap: () async {
-                      DateTime? pickedDate = await showDatePicker(
+                      pickedDate = await showDatePicker(
                           context: context,
                           initialDate: DateTime.now(), //get today's date
                           firstDate: DateTime(
@@ -141,7 +148,9 @@ class _buyTicketPageState extends State<buyTicketPage> {
                           lastDate: DateTime(2101));
                       if (pickedDate != null) {
                         String formattedDate =
-                            DateFormat("mm-dd-yyyy").format(pickedDate);
+                            DateFormat("MM-dd-yyyy").format(pickedDate!);
+                        print(
+                            formattedDate); //pickedDate output format => 2019-03-10
                         setState(() {
                           dateController.text = formattedDate.toString();
                         });
@@ -168,7 +177,7 @@ class _buyTicketPageState extends State<buyTicketPage> {
                       decoration: BoxDecoration(
                         color: Color.fromARGB(255, 188, 55, 190),
                         borderRadius: BorderRadius.circular(25),
-                        boxShadow: [
+                        boxShadow: const [
                           BoxShadow(
                             color: Color.fromARGB(255, 48, 2, 58),
                             blurRadius: 5,
@@ -183,20 +192,21 @@ class _buyTicketPageState extends State<buyTicketPage> {
                             if (_counter > 0) {
                               _counter--;
                               _price = 15.99 * _counter;
+                              _price = double.parse(_price.toStringAsFixed(2));
                             }
                           });
                         },
                       ),
                     ),
                     Text(
-                      "${_counter}",
+                      "$_counter",
                       style: TextStyle(color: Colors.white, fontSize: 30),
                     ),
                     Container(
                       decoration: BoxDecoration(
                         color: Color.fromARGB(255, 188, 55, 190),
                         borderRadius: BorderRadius.circular(25),
-                        boxShadow: [
+                        boxShadow: const [
                           BoxShadow(
                             color: Color.fromARGB(255, 48, 2, 58),
                             blurRadius: 5,
@@ -208,8 +218,11 @@ class _buyTicketPageState extends State<buyTicketPage> {
                         icon: Icon(Icons.add),
                         onPressed: () {
                           setState(() {
-                            _counter++;
+                            //user can only buy 10 tickets
+                            if (_counter < 10) _counter++;
+
                             _price = 15.99 * _counter;
+                            _price = double.parse(_price.toStringAsFixed(2));
                           });
                         },
                       ),
@@ -222,7 +235,7 @@ class _buyTicketPageState extends State<buyTicketPage> {
                   children: [
                     Expanded(
                         flex: 2,
-                        child: Text("${_price}",
+                        child: Text("$_price",
                             style:
                                 TextStyle(color: Colors.white, fontSize: 20))),
                     Expanded(
@@ -230,14 +243,37 @@ class _buyTicketPageState extends State<buyTicketPage> {
                         child: Container(
                           width: 100,
                           child: TextButton(
-                            child: Text('Pay'),
                             onPressed: () {
-                              Get.to(checkoutPage());
+                              if (_counter == 0) {
+                                Get.snackbar(
+                                    'Error', 'Please select a ticket to buy',
+                                    snackPosition: SnackPosition.BOTTOM,
+                                    backgroundColor: Colors.red,
+                                    colorText: Colors.white,
+                                    duration: const Duration(seconds: 2));
+                                return;
+                              }
+                              if (pickedDate == null) {
+                                Get.snackbar(
+                                  'Error',
+                                  'Please select a date to continue',
+                                  snackPosition: SnackPosition.BOTTOM,
+                                  backgroundColor: Colors.red,
+                                  colorText: Colors.white,
+                                );
+                                return;
+                              }
+
+                              Get.to(checkoutPage(
+                                  price: _price,
+                                  date: pickedDate!,
+                                  tickets: _counter));
                             },
                             style: TextButton.styleFrom(
                                 foregroundColor: Colors.red,
                                 elevation: 2,
                                 backgroundColor: Colors.amber),
+                            child: Text('Pay'),
                           ),
                         ))
                   ],

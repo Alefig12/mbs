@@ -1,20 +1,25 @@
 import 'package:mbs/objects/customer.dart';
+import 'package:mbs/objects/movie.dart';
 
 class Ticket {
   final int _id;
-  final int _movieID;
+  final Movie _movie;
   int _numberOfSeats;
   double _price;
   String _barcode;
-  int _auditoriumID;
+  String _cinemaName;
+  DateTime _showTime;
+
   Customer _customer;
 
-  Ticket(this._id, this._movieID, this._numberOfSeats, this._price,
-      this._barcode, this._auditoriumID, this._customer);
+  Ticket(this._id, this._movie, this._numberOfSeats, this._price, this._barcode,
+      this._customer, this._cinemaName, this._showTime) {
+    _customer.tickets.add(this);
+  }
 
   int get id => _id;
 
-  int get movieID => _movieID;
+  Movie get movie => _movie;
 
   int get numberOfSeats => _numberOfSeats;
 
@@ -22,9 +27,11 @@ class Ticket {
 
   String get barcode => _barcode;
 
-  int get auditoriumID => _auditoriumID;
-
   Customer get customer => _customer;
+
+  String get cinemaName => _cinemaName;
+
+  DateTime get showTime => _showTime;
 
   set numberOfSeats(int numberOfSeats) {
     _numberOfSeats = numberOfSeats;
@@ -38,12 +45,16 @@ class Ticket {
     _barcode = barcode;
   }
 
-  set auditoriumID(int auditoriumID) {
-    _auditoriumID = auditoriumID;
-  }
-
   set customer(Customer customer) {
     _customer = customer;
+  }
+
+  set cinemaName(String cinemaName) {
+    _cinemaName = cinemaName;
+  }
+
+  set showTime(DateTime showTime) {
+    _showTime = showTime;
   }
 
   void editTicket(int numberOfSeats, double price, String barcode,
@@ -51,7 +62,6 @@ class Ticket {
     _numberOfSeats = numberOfSeats;
     _price = price;
     _barcode = barcode;
-    _auditoriumID = auditoriumID;
     _customer = customer;
   }
 

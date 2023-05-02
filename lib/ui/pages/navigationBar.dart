@@ -1,8 +1,11 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mbs/objects/admin.dart';
 import 'package:mbs/ui/pages/menu_page.dart';
 import 'package:mbs/ui/pages/profile_page.dart';
+import 'package:mbs/ui/pages/report_page.dart';
 import 'package:mbs/ui/pages/tickets_page.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
@@ -16,30 +19,10 @@ class NavPage extends StatefulWidget {
 class _NavPageState extends State<NavPage> {
   int _navIndex = 0;
   PageController _pageController = PageController();
+  AdminController adminController = Get.find();
 
   // ignore: prefer_final_fields
-  static List<Widget> _widgetOptions = <Widget>[
-    // ignore: prefer_const_constructors
-    MenuPage(),
-    TicketPage(movies: [
-      (AMovie(
-        movieImage: Image.asset('assets/poster2.jpg'),
-        movieLocation: 'lubbock',
-        movieName: 'el salvador',
-      )),
-      (AMovie(
-        movieImage: Image.asset('assets/poster2.jpg'),
-        movieLocation: 'lubbock',
-        movieName: 'el salvador',
-      )),
-      (AMovie(
-        movieImage: Image.asset('assets/poster2.jpg'),
-        movieLocation: 'lubbock',
-        movieName: 'el salvador',
-      ))
-    ]),
-    ProfilePage(name: 'User/Admin', email: 'email@inst.com')
-  ];
+  static late List<Widget> _widgetOptions;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -52,6 +35,18 @@ class _NavPageState extends State<NavPage> {
   @override
   void initState() {
     super.initState();
+    _widgetOptions = adminController.isAdmin()
+        ? [
+            // ignore: prefer_const_constructors
+            MenuPage(),
+            ReportPage(),
+            ProfilePage(name: 'Admin', email: 'email@inst.com')
+          ]
+        : [
+            const MenuPage(),
+            TicketPage(),
+            ProfilePage(name: 'User', email: '')
+          ];
   }
 
   @override
@@ -80,7 +75,7 @@ class _NavPageState extends State<NavPage> {
       ),
       // ignore: prefer_const_constructors
       bottomNavigationBar: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Color.fromARGB(255, 28, 1, 35),
           boxShadow: [
             BoxShadow(color: Colors.black, spreadRadius: 0, blurRadius: 18),
@@ -93,28 +88,30 @@ class _NavPageState extends State<NavPage> {
 
           // ignore: prefer_const_constructors
           child: GNav(
-              backgroundColor: Color.fromARGB(255, 28, 1, 35),
+              backgroundColor: const Color.fromARGB(255, 28, 1, 35),
               color: Colors.white,
-              activeColor: Color.fromARGB(255, 255, 145, 61),
-              tabBackgroundColor: Color.fromARGB(255, 28, 1, 35),
+              activeColor: const Color.fromARGB(255, 255, 145, 61),
+              tabBackgroundColor: const Color.fromARGB(255, 28, 1, 35),
               padding: const EdgeInsets.all(10),
               gap: 8,
               selectedIndex: _navIndex,
               onTabChange: (index) {
                 _onItemTapped(index);
               },
-              tabs: const [
-                GButton(
+              tabs: [
+                const GButton(
                   icon: Icons.home,
                   iconSize: 30,
                   text: 'home',
                 ),
                 GButton(
-                  icon: Icons.local_activity,
-                  text: 'tickets',
+                  icon: adminController.isAdmin()
+                      ? Icons.wysiwyg
+                      : Icons.local_activity,
+                  text: adminController.isAdmin() ? 'report' : 'tickets',
                   iconSize: 30,
                 ),
-                GButton(
+                const GButton(
                   icon: Icons.supervisor_account,
                   text: 'profile',
                   iconSize: 30,

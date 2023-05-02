@@ -40,7 +40,7 @@ class _ReviewPageState extends State<ReviewPage> {
                 Expanded(
                     flex: 1,
                     child: IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back,
                         color: Colors.white,
                       ),
@@ -48,7 +48,7 @@ class _ReviewPageState extends State<ReviewPage> {
                         Get.back();
                       },
                     )),
-                Expanded(
+                const Expanded(
                   flex: 4,
                   child: Text(
                     'Reviews',
@@ -61,12 +61,12 @@ class _ReviewPageState extends State<ReviewPage> {
               ],
             ),
           ),
-          Divider(
+          const Divider(
             height: 15,
             thickness: 3,
             color: Colors.white,
           ),
-          SizedBox(
+          const SizedBox(
             height: 40,
           ),
           Expanded(
@@ -82,7 +82,7 @@ class _ReviewPageState extends State<ReviewPage> {
           Expanded(
             flex: 4,
             child: Container(
-              padding: EdgeInsets.all(18),
+              padding: const EdgeInsets.all(18),
               child: TextField(
                 controller: reviewController,
                 decoration: InputDecoration(
@@ -90,22 +90,22 @@ class _ReviewPageState extends State<ReviewPage> {
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15.0),
                   ),
-                  fillColor: Color.fromARGB(255, 255, 255, 255),
+                  fillColor: const Color.fromARGB(255, 255, 255, 255),
                   hintText: 'type here...',
                 ),
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Expanded(
             flex: 2,
             child: Container(
               decoration: BoxDecoration(
-                color: Color.fromARGB(58, 255, 255, 255),
+                color: const Color.fromARGB(58, 255, 255, 255),
                 borderRadius: BorderRadius.circular(10),
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                     color: Color.fromARGB(255, 27, 1, 33),
                     blurRadius: 5,
@@ -115,18 +115,22 @@ class _ReviewPageState extends State<ReviewPage> {
               ),
               child: TextButton(
                   onPressed: () {
-                    Review review = Review(1, reviewController.text,
-                        customerController.customer.username, widget.movie);
+                    MovieController movieController = Get.find();
+                    Review review = Review(
+                        1,
+                        reviewController.text,
+                        customerController.customer.username,
+                        movieController.selectedMovie);
 
                     Get.back();
                   },
-                  child: Text(
+                  child: const Text(
                     'SEND REVIEW',
                     style: TextStyle(color: Colors.white, fontSize: 22),
                   )),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 40,
           ),
         ],

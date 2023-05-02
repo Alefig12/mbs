@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:get/get.dart';
+import 'package:mbs/objects/movie.dart';
 import 'package:mbs/ui/pages/buyTickets_page.dart';
 
 class popularMovie extends StatefulWidget {
@@ -29,9 +30,11 @@ class posterMovie extends StatefulWidget {
   List<String> movieGenders;
   ImageProvider<Object> movieImage;
   bool admin;
+  Movie? movie;
 
   posterMovie(
       {super.key,
+      this.movie,
       required this.movieName,
       required this.movieGenders,
       required this.movieImage,
@@ -79,7 +82,8 @@ class _posterMovieState extends State<posterMovie> {
                         IconButton(
                           icon: Icon(Icons.delete),
                           iconSize: 20, //
-                          onPressed: () => _onBackButtonPressed(context),
+                          onPressed: () =>
+                              _onBackButtonPressed(context, widget.movie),
                         )
                       ],
                     ),
@@ -104,7 +108,7 @@ class _posterMovieState extends State<posterMovie> {
             Expanded(
               flex: 1,
               child: Text(
-                widget.movieGenders[0],
+                widget.movieGenders.isEmpty ? '' : widget.movieGenders[0],
                 style: TextStyle(
                     color: Color.fromRGBO(255, 141, 64, 1),
                     fontWeight: FontWeight.w500,
@@ -117,7 +121,7 @@ class _posterMovieState extends State<posterMovie> {
     );
   }
 
-  Future<bool> _onBackButtonPressed(BuildContext context) async {
+  Future<bool> _onBackButtonPressed(BuildContext context, Movie? movie) async {
     bool? exitApp = await showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -133,6 +137,9 @@ class _posterMovieState extends State<posterMovie> {
                     child: Text('No')),
                 TextButton(
                     onPressed: () {
+                      MovieController movieController = Get.find();
+                      movieController.removeMovie(movie!);
+                      setState(() {});
                       Navigator.of(context).pop(false);
                       //delete
                     },

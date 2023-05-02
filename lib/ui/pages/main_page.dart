@@ -6,14 +6,14 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: Key('mainPage'),
+        key: const Key('mainPage'),
         appBar: AppBar(
           title: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             IconButton(
-              icon: Icon(Icons.person_outline_rounded),
+              icon: const Icon(Icons.person_outline_rounded),
               onPressed: () {},
             ),
-            Text(
+            const Text(
               'Hello, Guest!',
               style: TextStyle(
                 color: Colors.white,
@@ -22,7 +22,7 @@ class MainPage extends StatelessWidget {
               ),
             )
           ]),
-          backgroundColor: Color.fromARGB(255, 43, 4, 56),
+          backgroundColor: const Color.fromARGB(255, 43, 4, 56),
           centerTitle: true,
           elevation: 1,
           shadowColor: Colors.white,
@@ -37,7 +37,7 @@ class MainPage extends StatelessWidget {
             Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
-                  children: [
+                  children: const [
                     Text(
                       'MOVIE \n THEATER',
                       textAlign: TextAlign.center,
@@ -48,7 +48,7 @@ class MainPage extends StatelessWidget {
                     ),
                   ],
                 )),
-            SizedBox(height: 250.0),
+            const SizedBox(height: 250.0),
             SizedBox(
               width: 320.0,
               height: 60,
@@ -65,13 +65,13 @@ class MainPage extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {},
-                child: Text(
+                child: const Text(
                   'Sign Up',
                   style: TextStyle(fontSize: 25),
                 ),
               ),
             ),
-            SizedBox(height: 30.0),
+            const SizedBox(height: 30.0),
             SizedBox(
               width: 320.0,
               height: 60,
@@ -88,7 +88,7 @@ class MainPage extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {},
-                child: Text(
+                child: const Text(
                   'Log In',
                   style: TextStyle(fontSize: 25),
                 ),

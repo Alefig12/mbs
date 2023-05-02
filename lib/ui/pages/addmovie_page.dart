@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mbs/objects/movie.dart';
 
 class AddMovie extends StatefulWidget {
   const AddMovie({Key? key}) : super(key: key);
@@ -14,21 +15,23 @@ class _AddMovieState extends State<AddMovie> {
   String? _selectedItem;
   String? _selectedOption = '';
 
+  TextEditingController movieTitle = TextEditingController();
+
   File? _image;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: Key('addMoviePage'),
+      key: const Key('addMoviePage'),
       appBar: AppBar(
         toolbarHeight: 70,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
-              icon: Icon(Icons.arrow_back_ios),
+              icon: const Icon(Icons.arrow_back_ios),
               onPressed: () {},
             ),
-            Text(
+            const Text(
               'MOVIES',
               style: TextStyle(
                 color: Colors.white,
@@ -36,10 +39,10 @@ class _AddMovieState extends State<AddMovie> {
                 fontWeight: FontWeight.w900,
               ),
             ),
-            SizedBox(width: 40.0),
+            const SizedBox(width: 40.0),
           ],
         ),
-        backgroundColor: Color.fromARGB(255, 43, 4, 56),
+        backgroundColor: const Color.fromARGB(255, 43, 4, 56),
         centerTitle: true,
         elevation: 2,
         shadowColor: Colors.white,
@@ -57,7 +60,7 @@ class _AddMovieState extends State<AddMovie> {
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
+                        children: const [
                           Icon(
                             Icons.movie,
                             size: 50.0,
@@ -79,11 +82,11 @@ class _AddMovieState extends State<AddMovie> {
                           )
                         ],
                       ),
-                      SizedBox(height: 30.0),
+                      const SizedBox(height: 30.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
+                          const Text(
                             'Movie Title:',
                             style: TextStyle(
                               color: Colors.white,
@@ -91,11 +94,12 @@ class _AddMovieState extends State<AddMovie> {
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          SizedBox(width: 20.0),
+                          const SizedBox(width: 20.0),
                           Expanded(
                             child: TextFormField(
-                              style: TextStyle(color: Colors.white),
-                              decoration: InputDecoration(
+                              controller: movieTitle,
+                              style: const TextStyle(color: Colors.white),
+                              decoration: const InputDecoration(
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
                                 ),
@@ -107,11 +111,11 @@ class _AddMovieState extends State<AddMovie> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 30.0),
+                      const SizedBox(height: 30.0),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
+                          const Text(
                             'ADD POSTER IMAGE',
                             style: TextStyle(
                               color: Colors.white,
@@ -119,26 +123,28 @@ class _AddMovieState extends State<AddMovie> {
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          SizedBox(height: 10.0),
+                          const SizedBox(height: 10.0),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                'Localization:',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.w600,
+                              Expanded(
+                                child: const Text(
+                                  'Localization:',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
                               ),
-                              Icon(
+                              const Icon(
                                 Icons.location_on,
                                 size: 30.0,
                                 color: Colors.white,
                               ),
-                              SizedBox(width: 5.0),
                               DropdownButton<String>(
-                                dropdownColor: Color.fromARGB(255, 43, 4, 56),
+                                dropdownColor:
+                                    const Color.fromARGB(255, 43, 4, 56),
                                 value: _selectedItem,
                                 onChanged: (String? newValue) {
                                   setState(() {
@@ -153,22 +159,25 @@ class _AddMovieState extends State<AddMovie> {
                                 ].map<DropdownMenuItem<String>>((String value) {
                                   return DropdownMenuItem<String>(
                                     value: value,
-                                    child: Text(value,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w600,
-                                        )),
+                                    child: FittedBox(
+                                      fit: BoxFit.fitWidth,
+                                      child: Text(value,
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w600,
+                                          )),
+                                    ),
                                   );
                                 }).toList(),
                               ),
                             ],
                           ),
-                          SizedBox(height: 25.0),
+                          const SizedBox(height: 25.0),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              const Text(
                                 'CLASSIFICATION:',
                                 style: TextStyle(
                                   color: Colors.white,
@@ -176,12 +185,12 @@ class _AddMovieState extends State<AddMovie> {
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
-                              SizedBox(height: 10.0),
+                              const SizedBox(height: 10.0),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   RadioListTile(
-                                    title: Text(
+                                    title: const Text(
                                       'Legendary',
                                       style: TextStyle(color: Colors.white),
                                     ),
@@ -195,7 +204,7 @@ class _AddMovieState extends State<AddMovie> {
                                     activeColor: Colors.white,
                                   ),
                                   RadioListTile(
-                                    title: Text('Fantasy',
+                                    title: const Text('Fantasy',
                                         style: TextStyle(color: Colors.white)),
                                     value: 'fantasy',
                                     groupValue: _selectedOption,
@@ -207,7 +216,7 @@ class _AddMovieState extends State<AddMovie> {
                                     activeColor: Colors.white,
                                   ),
                                   RadioListTile(
-                                    title: Text(
+                                    title: const Text(
                                       'Adventure',
                                       style: TextStyle(color: Colors.white),
                                     ),
@@ -226,7 +235,7 @@ class _AddMovieState extends State<AddMovie> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 20.0),
+                      const SizedBox(height: 20.0),
                       SizedBox(
                         width: 320.0,
                         height: 60,
@@ -235,7 +244,7 @@ class _AddMovieState extends State<AddMovie> {
                             foregroundColor:
                                 MaterialStateProperty.all<Color>(Colors.grey),
                             backgroundColor: MaterialStateProperty.all<Color>(
-                                Color.fromARGB(255, 244, 192, 30)),
+                                const Color.fromARGB(255, 244, 192, 30)),
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(
                               RoundedRectangleBorder(
@@ -243,8 +252,22 @@ class _AddMovieState extends State<AddMovie> {
                               ),
                             ),
                           ),
-                          onPressed: () {},
-                          child: Text(
+                          onPressed: () {
+                            String title = movieTitle.text;
+                            String location = _selectedItem!;
+                            String genre = _selectedOption!;
+                            MovieController movieController = Get.find();
+
+                            Movie movie =
+                                Movie(0, title, [], "", Duration(hours: 2));
+
+                            movie.addGenre(genre);
+
+                            movieController.addMovie(movie);
+
+                            Get.back();
+                          },
+                          child: const Text(
                             'ADD MOVIE',
                             style: TextStyle(
                                 fontSize: 25,

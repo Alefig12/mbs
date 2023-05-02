@@ -8,7 +8,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: Key('loginPage'),
+        key: const Key('loginPage'),
         resizeToAvoidBottomInset: true,
         body: SafeArea(
             child: Center(
@@ -18,7 +18,7 @@ class LoginPage extends StatelessWidget {
           children: [
             Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: Column(children: [
+                child: Column(children: const [
                   Text(
                     'Login',
                     textAlign: TextAlign.center,
@@ -28,42 +28,42 @@ class LoginPage extends StatelessWidget {
                         color: Colors.white),
                   )
                 ])),
-            SizedBox(height: 80.0),
+            const SizedBox(height: 80.0),
             Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(
+              const Text(
                 'EMAIL',
                 style: TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.w900,
                     color: Colors.white),
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               SizedBox(
                 width: 320.0,
                 child: TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                   filled: true,
                   fillColor: Colors.grey,
                 )),
               ),
-              SizedBox(height: 20.0),
-              Text(
+              const SizedBox(height: 20.0),
+              const Text(
                 'PASSWORD',
                 style: TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.w900,
                     color: Colors.white),
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               SizedBox(
                 width: 320.0,
                 child: TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                   filled: true,
                   fillColor: Colors.grey,
                 )),
               ),
-              SizedBox(height: 40.0),
+              const SizedBox(height: 40.0),
               SizedBox(
                 width: 320.0,
                 height: 60,
@@ -80,17 +80,17 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {},
-                  child: Text(
+                  child: const Text(
                     'LOGIN',
                     style: TextStyle(fontSize: 25),
                   ),
                 ),
               ),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               Wrap(
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     "Don't have an account? ",
                     style: TextStyle(
                         fontSize: 16.0,
@@ -99,9 +99,12 @@ class LoginPage extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const SignUp()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignUp()));
                     },
-                    child: Text(
+                    child: const Text(
                       'Sign up',
                       style: TextStyle(
                           fontSize: 16.0,

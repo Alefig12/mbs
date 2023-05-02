@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mbs/custom_icons_icons.dart';
@@ -152,10 +151,11 @@ class ManageAccount extends StatelessWidget {
                   style: TextStyle(color: Colors.white, fontSize: 30))
             ],
           ),
-        ].map((widget) => Padding(
-          padding: EdgeInsets.all(8),
-          child: widget,
-        ))
+        ]
+            .map((widget) => Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: widget,
+                ))
             .toList(),
       ),
     );
@@ -205,7 +205,7 @@ Widget adminCard = Card(
       )
     ]
         .map((widget) => Padding(
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               child: widget,
             ))
         .toList(),
@@ -274,7 +274,7 @@ Widget personCard = Card(
       )
     ]
         .map((widget) => Padding(
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               child: widget,
             ))
         .toList(),

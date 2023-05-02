@@ -23,6 +23,7 @@ class selectedMoviePage extends StatefulWidget {
 }
 
 class _selectedMoviePageState extends State<selectedMoviePage> {
+  MovieController movieController = Get.find();
   // List<String> genders = ['fiction', 'fantasy', 'action'];
   @override
   Widget build(BuildContext context) {
@@ -91,7 +92,7 @@ class _selectedMoviePageState extends State<selectedMoviePage> {
                 ),
                 child: Column(
                   children: [
-                    Expanded(
+                    const Expanded(
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
@@ -103,31 +104,35 @@ class _selectedMoviePageState extends State<selectedMoviePage> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Expanded(
                       flex: 3,
                       child: Container(
-                        child: ListView.builder(
-                            itemCount: widget.movie.reviews.length,
-                            scrollDirection: Axis.vertical,
-                            itemBuilder: (context, index) {
-                              return Column(
-                                children: [
-                                  Obx(
-                                    //got to change this, it's not working
-                                    () => review(
-                                        widget.movie.reviews[index].author,
-                                        widget
-                                            .movie.reviews[index].description),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                ],
-                              );
-                            }),
+                        child: Obx(
+                          () => ListView.builder(
+                              itemCount:
+                                  movieController.selectedMovie.reviews.length,
+                              scrollDirection: Axis.vertical,
+                              itemBuilder: (context, index) {
+                                return Column(
+                                  children: [
+                                    Obx(
+                                      //got to change this, it's not working
+                                      () => review(
+                                          movieController.selectedMovie
+                                              .reviews[index].author,
+                                          movieController.selectedMovie
+                                              .reviews[index].description),
+                                    ),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                  ],
+                                );
+                              }),
+                        ),
                       ),
                     ),
                   ],
@@ -154,7 +159,7 @@ class _selectedMoviePageState extends State<selectedMoviePage> {
                         Get.to(ReviewPage(
                           movie: widget.movie,
                           movieImage: widget.movieImage,
-                        ));
+                        ))?.then((value) => setState(() {}));
                       },
                       child: const Text(
                         'Add review',
@@ -179,7 +184,7 @@ class _selectedMoviePageState extends State<selectedMoviePage> {
                   child: TextButton(
                       onPressed: () {
                         Get.to(buyTicketPage(
-                            movieName: widget.movieName,
+                            movie: movieController.selectedMovie,
                             movieImage: widget.movieImage));
                       },
                       child: const Text(
@@ -197,7 +202,7 @@ class _selectedMoviePageState extends State<selectedMoviePage> {
 }
 
 class review extends StatefulWidget {
-  review(String this.name, String this.description, {super.key});
+  const review(this.name, this.description, {super.key});
   final String name;
   final String description;
   @override

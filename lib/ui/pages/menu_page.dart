@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mbs/objects/admin.dart';
 import 'package:mbs/objects/movie.dart';
 import 'package:mbs/ui/pages/addmovie_page.dart';
 import 'package:mbs/ui/pages/buyTickets_page.dart';
@@ -16,13 +17,26 @@ class MenuPage extends StatefulWidget {
 class _MenuPageState extends State<MenuPage> {
   final ScrollController scrollController = ScrollController();
   bool admin = true;
+  String search = '';
+  MovieController movieController = Get.find();
+  TextEditingController searchController = TextEditingController();
+  List<Movie> movieList = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    movieList = movieController.movies;
+    AdminController adminController = Get.find();
+    admin = adminController.isAdmin();
+  }
 
   @override
   Widget build(BuildContext context) {
-    MovieController movieController = Get.find();
-
+    movieList = movieController.movies;
     return SafeArea(
         child: Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -50,7 +64,9 @@ class _MenuPageState extends State<MenuPage> {
                         flex: 2,
                         child: IconButton(
                           onPressed: () {
-                            Get.to(const AddMovie());
+                            Get.to(() => const AddMovie())!.then((value) {
+                              setState(() {});
+                            });
                           },
                           icon: const Icon(
                             Icons.add_circle_outline,
@@ -62,14 +78,22 @@ class _MenuPageState extends State<MenuPage> {
                     flex: 11,
                     child: Container(
                       child: TextField(
+                        controller: searchController,
                         decoration: InputDecoration(
                           filled: true,
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15.0),
                           ),
-                          fillColor: const Color.fromARGB(82, 255, 255, 255),
-                          hintText: 'browse...',
+                          fillColor: const Color.fromARGB(80, 255, 255, 255),
+                          hintText: 'type here...',
                         ),
+                        onChanged: (value) {
+                          setState(() {
+                            search = value;
+                            // movieList = movieController.searchMovie(search);
+                            // print(movieList);
+                          });
+                        },
                       ),
                     ),
                   ),
@@ -89,33 +113,70 @@ class _MenuPageState extends State<MenuPage> {
           ),
           Expanded(
             flex: 9,
-            child: ListView.builder(
-              controller: scrollController,
-              padding: const EdgeInsets.only(left: 18, right: 18, top: 5),
-              scrollDirection: Axis.horizontal,
-              itemCount: movieController.movies.length,
-              itemBuilder: (context, index) => Row(
-                children: [
-                  GestureDetector(
-                      onTap: () {
-                        Get.to(selectedMoviePage(
-                          movieImage: const AssetImage('assets/poster1.jpg'),
-                          movie: movieController.movies[index],
-                        ));
-                      },
-                      child: Container(
-                        child: posterMovie(
-                          movieImage: const AssetImage('assets/poster1.jpg'),
-                          movieGenders: movieController.movies[index].genres,
-                          movieName: movieController.movies[index].name,
-                          admin: admin,
-                        ),
-                      )),
-                  const SizedBox(
-                    width: 20,
-                  )
-                ],
-              ),
+            child: Obx(
+              () => ListView.builder(
+                  controller: scrollController,
+                  padding: const EdgeInsets.only(left: 18, right: 18, top: 5),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: movieController.movies
+                      .where((movie) => movie.name
+                          .toLowerCase()
+                          .contains(search.toLowerCase()))
+                      .toList()
+                      .length,
+                  itemBuilder: (context, index) {
+                    return Obx(
+                      () => Row(
+                        children: [
+                          GestureDetector(
+                              onTap: () {
+                                movieController.selectedMovie = movieController
+                                    .movies
+                                    .where((movie) => movie.name
+                                        .toLowerCase()
+                                        .contains(search.toLowerCase()))
+                                    .toList()[index];
+                                Get.to(selectedMoviePage(
+                                  movieImage:
+                                      const AssetImage('assets/poster1.jpg'),
+                                  movie: movieController.movies
+                                      .where((movie) => movie.name
+                                          .toLowerCase()
+                                          .contains(search.toLowerCase()))
+                                      .toList()[index],
+                                ));
+                              },
+                              child: Container(
+                                child: posterMovie(
+                                  movie: movieController.movies
+                                      .where((movie) => movie.name
+                                          .toLowerCase()
+                                          .contains(search.toLowerCase()))
+                                      .toList()[index],
+                                  movieImage:
+                                      const AssetImage('assets/poster1.jpg'),
+                                  movieGenders: movieController.movies
+                                      .where((movie) => movie.name
+                                          .toLowerCase()
+                                          .contains(search.toLowerCase()))
+                                      .toList()[index]
+                                      .genres,
+                                  movieName: movieController.movies
+                                      .where((movie) => movie.name
+                                          .toLowerCase()
+                                          .contains(search.toLowerCase()))
+                                      .toList()[index]
+                                      .name,
+                                  admin: admin,
+                                ),
+                              )),
+                          const SizedBox(
+                            width: 20,
+                          )
+                        ],
+                      ),
+                    );
+                  }),
             ),
           ),
           const Expanded(

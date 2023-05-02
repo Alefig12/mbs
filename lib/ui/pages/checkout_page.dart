@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mbs/objects/customer.dart';
+import 'package:mbs/objects/movie.dart';
+import 'package:mbs/objects/ticket.dart';
+import 'package:mbs/ui/pages/menu_page.dart';
+import 'package:mbs/ui/pages/navigationBar.dart';
 
 class checkoutPage extends StatefulWidget {
-  const checkoutPage({super.key});
+  final double price;
+  final DateTime date;
+  final int tickets;
+
+  const checkoutPage({
+    required this.price,
+    required this.date,
+    required this.tickets,
+    super.key,
+  });
 
   @override
   State<checkoutPage> createState() => _checkoutPageState();
@@ -11,6 +25,8 @@ class checkoutPage extends StatefulWidget {
 int? _card = 2;
 
 class _checkoutPageState extends State<checkoutPage> {
+  MovieController movieController = Get.find();
+  CustomerController customerController = Get.find<CustomerController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +42,7 @@ class _checkoutPageState extends State<checkoutPage> {
                     Expanded(
                         flex: 1,
                         child: IconButton(
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.arrow_back,
                             color: Colors.white,
                           ),
@@ -34,7 +50,7 @@ class _checkoutPageState extends State<checkoutPage> {
                             Get.back();
                           },
                         )),
-                    Expanded(
+                    const Expanded(
                       flex: 4,
                       child: Text(
                         'CHECKOUT',
@@ -46,13 +62,13 @@ class _checkoutPageState extends State<checkoutPage> {
                     ),
                   ],
                 ),
-                Divider(
+                const Divider(
                   height: 15,
                   thickness: 3,
                   color: Colors.white,
                 ),
                 Row(
-                  children: [
+                  children: const [
                     Text(
                       "PAYMENT METHOD",
                       style: TextStyle(
@@ -67,7 +83,7 @@ class _checkoutPageState extends State<checkoutPage> {
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Row(
@@ -85,7 +101,7 @@ class _checkoutPageState extends State<checkoutPage> {
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(14),
-                              boxShadow: [
+                              boxShadow: const [
                                 BoxShadow(
                                   color: Color.fromARGB(255, 48, 2, 58),
                                   blurRadius: 5,
@@ -93,13 +109,13 @@ class _checkoutPageState extends State<checkoutPage> {
                                 ),
                               ],
                             ),
-                            child: Icon(
+                            child: const Icon(
                               Icons.savings,
                               color: Color.fromARGB(255, 255, 55, 165),
                             ),
                           ),
                         ),
-                        Text("pigPal",
+                        const Text("pigPal",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
@@ -118,7 +134,7 @@ class _checkoutPageState extends State<checkoutPage> {
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(14),
-                              boxShadow: [
+                              boxShadow: const [
                                 BoxShadow(
                                   color: Color.fromARGB(255, 48, 2, 58),
                                   blurRadius: 5,
@@ -126,13 +142,13 @@ class _checkoutPageState extends State<checkoutPage> {
                                 ),
                               ],
                             ),
-                            child: Icon(
+                            child: const Icon(
                               Icons.credit_card,
                               color: Colors.amber,
                             ),
                           ),
                         ),
-                        Text("credit card",
+                        const Text("credit card",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
@@ -141,10 +157,10 @@ class _checkoutPageState extends State<checkoutPage> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
-                Align(
+                const Align(
                   alignment: Alignment.centerLeft,
                   child: Text('SELECT YOUR CARD',
                       style: TextStyle(
@@ -160,7 +176,7 @@ class _checkoutPageState extends State<checkoutPage> {
                     Card('CAFE XOXOXOXOX', 0, _card),
                   ],
                 ),
-                Align(
+                const Align(
                   alignment: Alignment.centerLeft,
                   child: Text('ITEMS',
                       style: TextStyle(
@@ -169,11 +185,11 @@ class _checkoutPageState extends State<checkoutPage> {
                           fontWeight: FontWeight.w500)),
                 ),
                 Container(
-                  margin: EdgeInsets.all(10),
+                  margin: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(48, 173, 162, 162),
+                    color: const Color.fromARGB(48, 173, 162, 162),
                     borderRadius: BorderRadius.circular(14),
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         color: Color.fromARGB(255, 48, 2, 58),
                         blurRadius: 5,
@@ -186,17 +202,17 @@ class _checkoutPageState extends State<checkoutPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text("x1",
-                            style: TextStyle(
+                        Text("x${widget.tickets}",
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 25,
                                 fontWeight: FontWeight.w500)),
-                        Icon(
+                        const Icon(
                           Icons.airplane_ticket,
                           color: Color.fromARGB(255, 54, 243, 63),
                         ),
-                        Text("Legend of white snake",
-                            style: TextStyle(
+                        Text(movieController.selectedMovie.name,
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 15,
                                 fontWeight: FontWeight.w500))
@@ -204,41 +220,58 @@ class _checkoutPageState extends State<checkoutPage> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('TOTAL',
+                    const Text('TOTAL',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 25,
                             fontWeight: FontWeight.w500)),
-                    Text('15.00 USD',
-                        style: TextStyle(
+                    Text('${widget.price}',
+                        style: const TextStyle(
                             color: Colors.white,
                             fontSize: 25,
                             fontWeight: FontWeight.w500))
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Container(
                   width: double.infinity,
                   child: TextButton(
-                    child: Text(
-                      'Pay',
-                      style: TextStyle(fontSize: 40),
-                    ),
                     onPressed: () {
-                      Get.to(checkoutPage());
+                      Movie movie = movieController.selectedMovie;
+
+                      //String that contains information of the movie, id of the customer and number of tickets
+                      String _barcode = movie.id.toString() +
+                          customerController.customer.id.toString() +
+                          widget.tickets.toString();
+
+                      Ticket ticket = Ticket(
+                          1,
+                          movie,
+                          widget.tickets,
+                          widget.price,
+                          _barcode,
+                          customerController.customer,
+                          "Lubbock",
+                          widget.date);
+
+                      Get.offAll(const NavPage());
                     },
                     style: TextButton.styleFrom(
                         foregroundColor: Colors.red,
                         elevation: 2,
                         backgroundColor: Colors.amber),
+                    child: const Text(
+                      'Pay',
+                      style: TextStyle(fontSize: 40),
+                    ),
                   ),
                 )
               ],
@@ -251,7 +284,7 @@ class _checkoutPageState extends State<checkoutPage> {
 }
 
 class Card extends StatefulWidget {
-  Card(String this.cardName, int this.i, int? this.card, {super.key});
+  Card(this.cardName, this.i, this.card, {super.key});
   final String cardName;
   final int i;
   int? card;
@@ -266,7 +299,7 @@ class _CardState extends State<Card> {
     return ListTile(
       title: Text(
         widget.cardName,
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
       ),
       leading: Radio<int>(
         value: widget.i,
