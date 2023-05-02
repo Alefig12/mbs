@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mbs/ui/pages/buyTickets_page.dart';
+import 'package:mbs/ui/pages/firebase_central.dart';
 import 'package:mbs/ui/pages/login_page.dart';
 import 'package:mbs/ui/pages/main_page.dart';
 import 'package:mbs/ui/pages/menu_page.dart';
@@ -20,7 +21,7 @@ class MBS extends StatelessWidget {
       title: 'MBS',
       theme: ThemeData(
           scaffoldBackgroundColor: const Color.fromARGB(255, 43, 4, 56)),
-      home: const NavPage(), // change back to login page
+      home: const FirebaseCentral(), // change back to login page
     );
   }
 }
