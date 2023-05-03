@@ -6,25 +6,6 @@ import 'package:get/get.dart';
 import 'package:mbs/objects/movie.dart';
 import 'package:mbs/ui/pages/buyTickets_page.dart';
 
-class popularMovie extends StatefulWidget {
-  const popularMovie({super.key});
-
-  @override
-  State<popularMovie> createState() => _popularMovieState();
-}
-
-class _popularMovieState extends State<popularMovie> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/poster2.jpg'), fit: BoxFit.cover),
-          borderRadius: BorderRadius.circular(10)),
-    );
-  }
-}
-
 class posterMovie extends StatefulWidget {
   String movieName;
   List<String> movieGenders;

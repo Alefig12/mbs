@@ -138,8 +138,8 @@ class _MenuPageState extends State<MenuPage> {
                                         .contains(search.toLowerCase()))
                                     .toList()[index];
                                 Get.to(selectedMoviePage(
-                                  movieImage:
-                                      const AssetImage('assets/poster1.jpg'),
+                                  movieImage: AssetImage(
+                                      'assets/${movieController.movies.where((movie) => movie.name.toLowerCase().contains(search.toLowerCase())).toList()[index].id}.jpg'),
                                   movie: movieController.movies
                                       .where((movie) => movie.name
                                           .toLowerCase()
@@ -187,7 +187,7 @@ class _MenuPageState extends State<MenuPage> {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'Most Popular',
+                  'Upcoming movies',
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w600,
@@ -205,7 +205,30 @@ class _MenuPageState extends State<MenuPage> {
               itemCount: 10,
               itemBuilder: (context, index) => Row(
                 children: [
-                  Container(width: 300, child: const popularMovie()),
+                  Container(
+                    width: 300,
+                    child: posterMovie(
+                      movie: movieController.movies
+                          .where((movie) => movie.name
+                              .toLowerCase()
+                              .contains(search.toLowerCase()))
+                          .toList()[index],
+                      movieImage: const AssetImage('assets/poster1.jpg'),
+                      movieGenders: movieController.movies
+                          .where((movie) => movie.name
+                              .toLowerCase()
+                              .contains(search.toLowerCase()))
+                          .toList()[index]
+                          .genres,
+                      movieName: movieController.movies
+                          .where((movie) => movie.name
+                              .toLowerCase()
+                              .contains(search.toLowerCase()))
+                          .toList()[index]
+                          .name,
+                      admin: admin,
+                    ),
+                  ),
                   const SizedBox(
                     width: 30,
                   )
