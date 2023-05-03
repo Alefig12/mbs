@@ -117,10 +117,11 @@ class _ReviewPageState extends State<ReviewPage> {
                   onPressed: () {
                     MovieController movieController = Get.find();
                     Review review = Review(
-                        1,
                         reviewController.text,
                         customerController.customer.username,
                         movieController.selectedMovie);
+
+                    review.addToMovie();
 
                     Get.back();
                   },

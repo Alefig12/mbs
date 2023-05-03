@@ -1,11 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:mbs/objects/customer.dart';
+import 'package:mbs/objects/movie.dart';
 
 class AuthenticationController extends GetxController {
   Future<String> login(email, password) async {
     try {
-      print("Entre");
+      MovieController movieController = Get.find();
+      await movieController.fetchMovies();
+      CustomerController customerController = Get.find();
+      await customerController.getCustomerFromDatabase(email);
+
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
 
@@ -25,11 +31,14 @@ class AuthenticationController extends GetxController {
     }
   }
 
-  Future<String> signup(email, password, username) async {
+  Future<String> signup(email, password) async {
     try {
+      CustomerController customerController = Get.find();
+
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
 
+      await customerController.addCustomerToDatabase(email);
       logout();
 
       return Future.value("success");
@@ -47,5 +56,17 @@ class AuthenticationController extends GetxController {
   Future<void> logout() async {
     await FirebaseAuth.instance.signOut();
     return Future.value();
+  }
+
+  bool isEmailValid(String email) {
+    return GetUtils.isEmail(email);
+  }
+
+  bool isPasswordValid(String password) {
+    return password.length >= 6;
+  }
+
+  bool passwordsMatch(String password, String confirmPassword) {
+    return password == confirmPassword;
   }
 }

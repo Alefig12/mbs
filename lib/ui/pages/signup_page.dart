@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mbs/objects/auth_controller.dart';
 import 'package:mbs/ui/pages/login_page.dart';
 
 class SignUp extends StatelessWidget {
@@ -6,7 +8,22 @@ class SignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController nameController = TextEditingController();
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+    TextEditingController confirmPasswordController = TextEditingController();
+
     return Scaffold(
+        appBar: AppBar(
+          shadowColor: const Color.fromARGB(255, 43, 4, 56),
+          backgroundColor: const Color.fromARGB(255, 43, 4, 56),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Get.back();
+            },
+          ),
+        ),
         key: const Key('signUpPage'),
         resizeToAvoidBottomInset: true,
         body: SafeArea(
@@ -71,10 +88,11 @@ class SignUp extends StatelessWidget {
                   SizedBox(
                     width: 320.0,
                     child: TextFormField(
+                        controller: nameController,
                         decoration: const InputDecoration(
-                      filled: true,
-                      fillColor: Colors.grey,
-                    )),
+                          filled: true,
+                          fillColor: Colors.grey,
+                        )),
                   ),
                   const SizedBox(height: 20.0),
                   const Text(
@@ -88,10 +106,11 @@ class SignUp extends StatelessWidget {
                   SizedBox(
                     width: 320.0,
                     child: TextFormField(
+                        controller: emailController,
                         decoration: const InputDecoration(
-                      filled: true,
-                      fillColor: Colors.grey,
-                    )),
+                          filled: true,
+                          fillColor: Colors.grey,
+                        )),
                   ),
                   const SizedBox(height: 20.0),
                   const Text(
@@ -105,10 +124,11 @@ class SignUp extends StatelessWidget {
                   SizedBox(
                     width: 320.0,
                     child: TextFormField(
+                        controller: passwordController,
                         decoration: const InputDecoration(
-                      filled: true,
-                      fillColor: Colors.grey,
-                    )),
+                          filled: true,
+                          fillColor: Colors.grey,
+                        )),
                   ),
                   const SizedBox(height: 20.0),
                   const Text(
@@ -122,10 +142,11 @@ class SignUp extends StatelessWidget {
                   SizedBox(
                     width: 320.0,
                     child: TextFormField(
+                        controller: confirmPasswordController,
                         decoration: const InputDecoration(
-                      filled: true,
-                      fillColor: Colors.grey,
-                    )),
+                          filled: true,
+                          fillColor: Colors.grey,
+                        )),
                   ),
                   const SizedBox(height: 40.0),
                   SizedBox(
@@ -144,7 +165,80 @@ class SignUp extends StatelessWidget {
                           ),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        AuthenticationController authenticationController =
+                            Get.find();
+
+                        //Check if the email is valid
+                        if (authenticationController
+                                .isEmailValid(emailController.text) ==
+                            false) {
+                          Get.snackbar(
+                            'Invalid Email',
+                            'Please enter a valid email',
+                            snackPosition: SnackPosition.BOTTOM,
+                            backgroundColor: Colors.red,
+                            colorText: Colors.white,
+                          );
+                          return;
+                        }
+
+                        if (authenticationController
+                                .isPasswordValid(passwordController.text) ==
+                            false) {
+                          Get.snackbar(
+                            'Invalid Password',
+                            'Please enter a 6 character or more password',
+                            snackPosition: SnackPosition.BOTTOM,
+                            backgroundColor: Colors.red,
+                            colorText: Colors.white,
+                          );
+                          return;
+                        }
+
+                        if (authenticationController.passwordsMatch(
+                                passwordController.text,
+                                confirmPasswordController.text) ==
+                            false) {
+                          Get.snackbar(
+                            'Password Mismatch',
+                            'Please enter the same password',
+                            snackPosition: SnackPosition.BOTTOM,
+                            backgroundColor: Colors.red,
+                            colorText: Colors.white,
+                          );
+                          return;
+                        }
+
+                        authenticationController
+                            .signup(
+                                emailController.text, passwordController.text)
+                            .then((value) => {
+                                  if (value == "success")
+                                    {
+                                      Get.snackbar("Success", "Account created",
+                                          snackPosition: SnackPosition.BOTTOM,
+                                          backgroundColor: Colors.green,
+                                          colorText: Colors.white)
+                                    }
+                                  else if (value == "email-already-in-use")
+                                    {
+                                      Get.snackbar("Error",
+                                          "The account already exists for that email.",
+                                          snackPosition: SnackPosition.BOTTOM,
+                                          backgroundColor: Colors.red,
+                                          colorText: Colors.white)
+                                    }
+                                  else
+                                    {
+                                      Get.snackbar(
+                                          "Error", "Account not created",
+                                          snackPosition: SnackPosition.BOTTOM,
+                                          backgroundColor: Colors.red,
+                                          colorText: Colors.white)
+                                    }
+                                });
+                      },
                       child: const Text(
                         'SIGN UP',
                         style: TextStyle(fontSize: 25),

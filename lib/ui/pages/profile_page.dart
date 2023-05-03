@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mbs/custom_icons_icons.dart';
+import 'package:mbs/objects/auth_controller.dart';
+import 'package:mbs/objects/customer.dart';
 
 class ProfilePage extends StatefulWidget {
   String name;
@@ -145,10 +148,26 @@ class ManageAccount extends StatelessWidget {
           name == 'admin' ? adminCard : personCard,
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Icon(Icons.exit_to_app_rounded, color: Colors.white, size: 50),
-              Text('Sign out',
-                  style: TextStyle(color: Colors.white, fontSize: 30))
+            children: [
+              IconButton(
+                  icon: Icon(Icons.exit_to_app_rounded,
+                      color: Colors.white, size: 50),
+                  onPressed: () {
+                    AuthenticationController authController =
+                        Get.find<AuthenticationController>();
+
+                    authController.logout();
+                  }),
+              TextButton(
+                child: Text('Sign out',
+                    style: TextStyle(color: Colors.white, fontSize: 30)),
+                onPressed: () {
+                  AuthenticationController authController =
+                      Get.find<AuthenticationController>();
+
+                  authController.logout();
+                },
+              )
             ],
           ),
         ]

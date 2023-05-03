@@ -82,7 +82,7 @@ class _buyTicketPageState extends State<buyTicketPage> {
                 padding: const EdgeInsets.only(top: 8.0),
                 child: posterMovie(
                   movieName: widget.movieName,
-                  movieGenders: const [''],
+                  movieGenders: widget.movie.genres,
                   movieImage: widget.movieImage,
                 ),
               ),

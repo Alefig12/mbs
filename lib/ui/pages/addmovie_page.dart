@@ -16,6 +16,9 @@ class _AddMovieState extends State<AddMovie> {
   String? _selectedOption = '';
 
   TextEditingController movieTitle = TextEditingController();
+  TextEditingController castController = TextEditingController();
+  TextEditingController minController = TextEditingController();
+  TextEditingController hourController = TextEditingController();
 
   File? _image;
   @override
@@ -23,23 +26,23 @@ class _AddMovieState extends State<AddMovie> {
     return Scaffold(
       key: const Key('addMoviePage'),
       appBar: AppBar(
+        leading: null,
         toolbarHeight: 70,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-              icon: const Icon(Icons.arrow_back_ios),
-              onPressed: () {},
-            ),
-            const Text(
-              'MOVIES',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 30.0,
-                fontWeight: FontWeight.w900,
+          children: const [
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Text(
+                'MOVIES',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.w900,
+                ),
               ),
             ),
-            const SizedBox(width: 40.0),
+            SizedBox(width: 40.0),
           ],
         ),
         backgroundColor: const Color.fromARGB(255, 43, 4, 56),
@@ -112,6 +115,99 @@ class _AddMovieState extends State<AddMovie> {
                         ],
                       ),
                       const SizedBox(height: 30.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            'Cast',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(width: 20.0),
+                          Expanded(
+                            child: TextFormField(
+                              controller: castController,
+                              style: const TextStyle(color: Colors.white),
+                              decoration: const InputDecoration(
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 30.0),
+
+                      //add time selector for movie duration
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            'Duration:',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(width: 20.0),
+                          SizedBox(
+                            width: 50,
+                            child: TextFormField(
+                              controller: hourController,
+                              style: const TextStyle(color: Colors.white),
+                              decoration: const InputDecoration(
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const Text(
+                            "hours",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(width: 40),
+                          SizedBox(
+                            width: 50,
+                            child: TextFormField(
+                              controller: minController,
+                              style: const TextStyle(color: Colors.white),
+                              decoration: const InputDecoration(
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const Text(
+                            "min",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          )
+                        ],
+                      ),
+                      const SizedBox(height: 30.0),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -127,8 +223,8 @@ class _AddMovieState extends State<AddMovie> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Expanded(
-                                child: const Text(
+                              const Expanded(
+                                child: Text(
                                   'Localization:',
                                   style: TextStyle(
                                     color: Colors.white,
@@ -257,13 +353,15 @@ class _AddMovieState extends State<AddMovie> {
                             String location = _selectedItem!;
                             String genre = _selectedOption!;
                             MovieController movieController = Get.find();
+                            int hours = int.parse(hourController.text);
+                            int minutes = int.parse(minController.text);
 
-                            Movie movie =
-                                Movie(0, title, [], "", Duration(hours: 2));
+                            Movie movie = Movie(title, [castController.text],
+                                "", Duration(hours: hours, minutes: minutes));
 
                             movie.addGenre(genre);
 
-                            movieController.addMovie(movie);
+                            movieController.addMovieToDatabase(movie);
 
                             Get.back();
                           },

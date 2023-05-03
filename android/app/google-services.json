@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "200222201182",
+    "firebase_url": "https://moviebs-c147d-default-rtdb.firebaseio.com",
     "project_id": "moviebs-c147d",
     "storage_bucket": "moviebs-c147d.appspot.com"
   },

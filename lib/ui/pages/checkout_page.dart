@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:mbs/objects/customer.dart';
 import 'package:mbs/objects/movie.dart';
 import 'package:mbs/objects/ticket.dart';
+import 'package:mbs/ui/pages/firebase_central.dart';
 import 'package:mbs/ui/pages/menu_page.dart';
 import 'package:mbs/ui/pages/navigationBar.dart';
 
@@ -253,7 +254,6 @@ class _checkoutPageState extends State<checkoutPage> {
                           widget.tickets.toString();
 
                       Ticket ticket = Ticket(
-                          1,
                           movie,
                           widget.tickets,
                           widget.price,
@@ -261,8 +261,9 @@ class _checkoutPageState extends State<checkoutPage> {
                           customerController.customer,
                           "Lubbock",
                           widget.date);
+                      ticket.addToCustomer();
 
-                      Get.offAll(const NavPage());
+                      Get.offAll(const FirebaseCentral());
                     },
                     style: TextButton.styleFrom(
                         foregroundColor: Colors.red,

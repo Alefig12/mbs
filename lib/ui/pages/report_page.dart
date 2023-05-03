@@ -6,6 +6,11 @@ import 'package:mbs/objects/movie.dart';
 class ReportPage extends StatelessWidget {
   const ReportPage({super.key});
 
+  Future<int> getTotalNumberOfTickets() async {
+    AdminController adminController = Get.find();
+    return await adminController.getTotalNumberOfTickets();
+  }
+
   @override
   Widget build(BuildContext context) {
     MovieController movieController = Get.find();
@@ -35,13 +40,26 @@ class ReportPage extends StatelessWidget {
               )),
           Padding(
             padding: EdgeInsets.all(20),
-            child: Text(
-              "${adminController.getTotalNumberOfTickets()}",
-              style: TextStyle(
-                  color: Colors.amber,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 60),
-            ),
+            child: FutureBuilder(
+                future: getTotalNumberOfTickets(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Text(
+                      "Loading...",
+                      style: TextStyle(
+                          color: Colors.amber,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 60),
+                    );
+                  }
+                  return Text(
+                    "${snapshot.data}",
+                    style: TextStyle(
+                        color: Colors.amber,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 60),
+                  );
+                }),
           ),
           Expanded(
             child: Padding(

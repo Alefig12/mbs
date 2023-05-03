@@ -16,7 +16,7 @@ class MenuPage extends StatefulWidget {
 
 class _MenuPageState extends State<MenuPage> {
   final ScrollController scrollController = ScrollController();
-  bool admin = true;
+  bool admin = false;
   String search = '';
   MovieController movieController = Get.find();
   TextEditingController searchController = TextEditingController();
@@ -29,6 +29,7 @@ class _MenuPageState extends State<MenuPage> {
     movieList = movieController.movies;
     AdminController adminController = Get.find();
     admin = adminController.isAdmin();
+    print(admin);
   }
 
   @override

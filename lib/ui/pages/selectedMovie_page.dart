@@ -119,7 +119,6 @@ class _selectedMoviePageState extends State<selectedMoviePage> {
                                 return Column(
                                   children: [
                                     Obx(
-                                      //got to change this, it's not working
                                       () => review(
                                           movieController.selectedMovie
                                               .reviews[index].author,

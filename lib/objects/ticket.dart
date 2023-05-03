@@ -2,7 +2,7 @@ import 'package:mbs/objects/customer.dart';
 import 'package:mbs/objects/movie.dart';
 
 class Ticket {
-  final int _id;
+  late final int _id;
   final Movie _movie;
   int _numberOfSeats;
   double _price;
@@ -12,10 +12,8 @@ class Ticket {
 
   Customer _customer;
 
-  Ticket(this._id, this._movie, this._numberOfSeats, this._price, this._barcode,
-      this._customer, this._cinemaName, this._showTime) {
-    _customer.tickets.add(this);
-  }
+  Ticket(this._movie, this._numberOfSeats, this._price, this._barcode,
+      this._customer, this._cinemaName, this._showTime) {}
 
   int get id => _id;
 
@@ -57,12 +55,20 @@ class Ticket {
     _showTime = showTime;
   }
 
+  set id(int id) {
+    _id = id;
+  }
+
   void editTicket(int numberOfSeats, double price, String barcode,
       int auditoriumID, Customer customer) {
     _numberOfSeats = numberOfSeats;
     _price = price;
     _barcode = barcode;
     _customer = customer;
+  }
+
+  void addToCustomer() {
+    _customer.addTicket(this);
   }
 
   void deleteTicket() {
