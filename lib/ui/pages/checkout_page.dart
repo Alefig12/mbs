@@ -172,9 +172,6 @@ class _checkoutPageState extends State<checkoutPage> {
                 Column(
                   children: <Widget>[
                     Card('VISA XXX XXXXX', 0, _card),
-                    Card('MASTER XXXXXX XX', 1, _card),
-                    Card('DEBIT XX XX XX', 2, _card),
-                    Card('CAFE XOXOXOXOX', 0, _card),
                   ],
                 ),
                 const Align(

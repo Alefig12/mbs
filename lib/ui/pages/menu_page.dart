@@ -154,8 +154,8 @@ class _MenuPageState extends State<MenuPage> {
                                           .toLowerCase()
                                           .contains(search.toLowerCase()))
                                       .toList()[index],
-                                  movieImage:
-                                      const AssetImage('assets/poster1.jpg'),
+                                  movieImage: AssetImage(
+                                      'assets/${movieController.movies.where((movie) => movie.name.toLowerCase().contains(search.toLowerCase())).toList()[index].id}.jpg'),
                                   movieGenders: movieController.movies
                                       .where((movie) => movie.name
                                           .toLowerCase()
@@ -197,45 +197,32 @@ class _MenuPageState extends State<MenuPage> {
             ),
           ),
           Expanded(
-            flex: 6,
-            child: ListView.builder(
-              controller: scrollController,
-              padding: const EdgeInsets.all(18),
-              scrollDirection: Axis.horizontal,
-              itemCount: 10,
-              itemBuilder: (context, index) => Row(
-                children: [
-                  Container(
-                    width: 300,
-                    child: posterMovie(
-                      movie: movieController.movies
-                          .where((movie) => movie.name
-                              .toLowerCase()
-                              .contains(search.toLowerCase()))
-                          .toList()[index],
-                      movieImage: const AssetImage('assets/poster1.jpg'),
-                      movieGenders: movieController.movies
-                          .where((movie) => movie.name
-                              .toLowerCase()
-                              .contains(search.toLowerCase()))
-                          .toList()[index]
-                          .genres,
-                      movieName: movieController.movies
-                          .where((movie) => movie.name
-                              .toLowerCase()
-                              .contains(search.toLowerCase()))
-                          .toList()[index]
-                          .name,
-                      admin: admin,
+              flex: 6,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    Container(
+                        width: 300,
+                        child: popularMovie(imagePath: 'assets/poster1.jpg')),
+                    const SizedBox(
+                      width: 30,
                     ),
-                  ),
-                  const SizedBox(
-                    width: 30,
-                  )
-                ],
-              ),
-            ),
-          ),
+                    Container(
+                        width: 300,
+                        child: popularMovie(imagePath: 'assets/poster2.jpg')),
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    Container(
+                        width: 300,
+                        child: popularMovie(imagePath: 'assets/poster3.jpeg')),
+                    const SizedBox(
+                      width: 30,
+                    ),
+                  ],
+                ),
+              )),
         ],
       ),
     ));

@@ -181,6 +181,9 @@ class MovieController extends GetxController {
   Future<void> fetchMovies() async {
     final database = FirebaseDatabase.instance.ref();
     DataSnapshot movies = await database.child('movies').get();
+    if (movies.value == null) {
+      return;
+    }
     final List<dynamic> moviesList = movies.value as List<dynamic>;
     print(moviesList);
     _movies.clear();
@@ -228,13 +231,18 @@ class MovieController extends GetxController {
       }
     } else {
       print('is map');
-      final Map<dynamic, dynamic> movies =
-          snapshot.value as Map<dynamic, dynamic>;
 
-      if (movies.isEmpty) {
+      if (snapshot.value == null) {
         newId = 1;
       } else {
-        newId = movies.keys.map((e) => int.parse(e)).reduce(max) + 1;
+        final Map<dynamic, dynamic> movies =
+            snapshot.value as Map<dynamic, dynamic>;
+
+        if (movies.isEmpty) {
+          newId = 1;
+        } else {
+          newId = movies.keys.map((e) => int.parse(e)).reduce(max) + 1;
+        }
       }
     }
 

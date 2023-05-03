@@ -64,6 +64,7 @@ class LoginPage extends StatelessWidget {
               SizedBox(
                 width: 320.0,
                 child: TextFormField(
+                    obscureText: true,
                     controller: passwordController,
                     decoration: const InputDecoration(
                       filled: true,
